@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'plugin:react/jsx-runtime'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/jsx-runtime',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -14,13 +19,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
-    'comma-dangle': ['error', 'always-multiline'],
-    semi: ['error', 'always'],
     'no-use-before-define': 'off',
-    'import/no-extraneous-dependencies': [
-      'error',
-      { devDependencies: ['**/*.test.js', '**/*.spec.js'] },
-    ],
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
     'no-shadow': 'off',
@@ -29,14 +28,6 @@ module.exports = {
       'error',
       {
         allowExpressions: true,
-      },
-    ],
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: false,
-        optionalDependencies: false,
-        peerDependencies: false,
       },
     ],
     'import/prefer-default-export': 'off',
