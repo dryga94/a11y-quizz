@@ -18,13 +18,18 @@ export default function Road({ questionConfig, prisonConfig }: IProps): JSX.Elem
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
 
-  console.log(prisonConfig)
+  console.log(prisonConfig);
   return (
     <Box>
-      <Button variant="contained" onClick={handleOpen}>Open modal</Button>
-      <QuestionModal open={open} handleClose={handleClose} questionConfig={activeQuestion}></QuestionModal>
+      <Button variant="contained" onClick={handleOpen}>
+        Open modal
+      </Button>
+      <QuestionModal
+        open={open}
+        handleClose={handleClose}
+        questionConfig={activeQuestion}
+      ></QuestionModal>
       <Button onClick={() => setActiveQuestion(prisonConfig[0])}>setActiveQuestion</Button>
-
 
       <Box>{isInPrison ? `${prisonConfig}` : `${questionConfig}`}</Box>
       <Button onClick={() => setIsInPrison(!isInPrison)}>Move to prison</Button>
