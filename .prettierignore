@@ -1,0 +1,12 @@
+node_modules
+build
+dist
+coverage
+config
+./public
+jest.config.js
+src/serviceWorker.ts
+src/assets
+src/reportWebVitals.ts
+jest.config.js
+*.html
