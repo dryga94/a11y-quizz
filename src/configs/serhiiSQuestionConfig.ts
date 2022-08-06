@@ -33,3 +33,18 @@ export const serhiiConfig = [
     ],
   },
 ] as IQuestion[];
+
+export const serhiiProConfig = [
+  {
+    title: 'ProQ1',
+    description: 'Description',
+  },
+  {
+    title: 'ProQ2',
+    description: 'Description',
+  },
+  {
+    title: 'ProQ3',
+    description: 'Description',
+  },
+] as IQuestion[];

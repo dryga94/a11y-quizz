@@ -12,7 +12,7 @@ interface QestionModalProps {
 }
 
 export default function QuestionModal({open, handleClose, questionConfig}: QestionModalProps): JSX.Element {
-console.log('fff', questionConfig)
+// console.log('fff', questionConfig)
 
   return (
     <Dialog
