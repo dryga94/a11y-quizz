@@ -32,6 +32,51 @@ export const serhiiConfig = [
       { title: 'На сайте не реализованы атрибуты aria для поддержки программ чтения с экрана.' },
     ],
   },
+  {
+    title: 'вопрос 3',
+    description: `...`,
+    imgUrl: '',
+    options: [
+      {
+        title: '1',
+        isCorrect: true,
+      },
+      {
+        title: '2',
+      },
+      { title: '3' },
+    ],
+  },
+  {
+    title: 'вопрос 4',
+    description: `...`,
+    imgUrl: '',
+    options: [
+      {
+        title: '1',
+        isCorrect: true,
+      },
+      {
+        title: '2',
+      },
+      { title: '3' },
+    ],
+  },
+  {
+    title: 'вопрос 5',
+    description: `...`,
+    imgUrl: '',
+    options: [
+      {
+        title: '1',
+        isCorrect: true,
+      },
+      {
+        title: '2',
+      },
+      { title: '3' },
+    ],
+  },
 ] as IQuestion[];
 
 export const serhiiProConfig = [
@@ -45,6 +90,14 @@ export const serhiiProConfig = [
   },
   {
     title: 'ProQ3',
+    description: 'Description',
+  },
+  {
+    title: 'ProQ4',
+    description: 'Description',
+  },
+  {
+    title: 'ProQ5',
     description: 'Description',
   },
 ] as IQuestion[];

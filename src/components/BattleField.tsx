@@ -15,6 +15,7 @@ export default function BattleField(): JSX.Element {
         gap={3}
       >
         <Road prisonConfig={serhiiProConfig} questionConfig={serhiiConfig} />
+        <Road prisonConfig={serhiiProConfig} questionConfig={serhiiConfig} />
       </Stack>
     </Container>
   );

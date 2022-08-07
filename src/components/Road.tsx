@@ -25,6 +25,7 @@ export default function Road({ questionConfig, prisonConfig }: IProps): JSX.Elem
   useEffect(() => {
     if (step > 0) {
       setActiveQuestion(isInPrison ? prisonConfig[step - 1] : questionConfig[step - 1]);
+      console.log('step,', step - 1);
     }
   }, [step, isInPrison]);
 
@@ -61,7 +62,11 @@ export default function Road({ questionConfig, prisonConfig }: IProps): JSX.Elem
 
       <QuestionModal
         open={open}
+        isInPrison={isInPrison}
+        step={step}
+        setStep={setStep}
         handleClose={handleClose}
+        setIsInPrison={setIsInPrison}
         questionConfig={activeQuestion || questionConfig[0]}
       ></QuestionModal>
     </Box>
