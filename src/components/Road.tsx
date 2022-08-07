@@ -11,11 +11,13 @@ import QuestionModal from './modal/QuestionModal';
 interface IProps {
   questionConfig: IQuestion[];
   prisonConfig: IQuestion[];
+  isActive: boolean;
 }
 
-export default function Road({ questionConfig, prisonConfig }: IProps): JSX.Element {
+export default function Road({ questionConfig, prisonConfig, isActive }: IProps): JSX.Element {
   const [step, setStep] = useState(0);
   const [isInPrison, setIsInPrison] = useState(false);
+  const [isAbleToAnswer, setIsAbleToAnswer] = useState(true);
 
   const [open, setOpen] = useState(false);
   const [activeQuestion, setActiveQuestion] = useState<IQuestion>(questionConfig[0]);
@@ -23,14 +25,25 @@ export default function Road({ questionConfig, prisonConfig }: IProps): JSX.Elem
   const handleClose = (): void => setOpen(false);
 
   useEffect(() => {
+    if (isActive && isAbleToAnswer) {
+      if (!isInPrison) {
+        setStep((prev) => prev + 1);
+      }
+      setTimeout(() => setOpen(true), 1000);
+    }
+  }, [isActive, isInPrison]);
+
+  useEffect(() => {
+    if (!isActive) {
+      setIsAbleToAnswer(true);
+    }
     if (step > 0) {
       setActiveQuestion(isInPrison ? prisonConfig[step - 1] : questionConfig[step - 1]);
-      console.log('step,', step - 1);
     }
-  }, [step, isInPrison]);
+  }, [step, isInPrison, isActive]);
 
   return (
-    <Box>
+    <Box bgcolor={isActive ? 'secondary.light' : 'transparent'}>
       <Box position="relative">
         <Stack>
           {Array.from(Array(8).keys())
@@ -63,8 +76,7 @@ export default function Road({ questionConfig, prisonConfig }: IProps): JSX.Elem
       <QuestionModal
         open={open}
         isInPrison={isInPrison}
-        step={step}
-        setStep={setStep}
+        setIsAbleToAnswer={setIsAbleToAnswer}
         handleClose={handleClose}
         setIsInPrison={setIsInPrison}
         questionConfig={activeQuestion || questionConfig[0]}
