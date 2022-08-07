@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -7,8 +8,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { useState } from 'react';
-import { IAnswer, IQuestion } from '../../interfaces/questions';
+import { IQuestion } from '../../interfaces/questions';
+import QuestionImageModal from './QuestionImageModal';
 
 interface QestionModalProps {
   open: boolean;
@@ -21,9 +22,6 @@ interface QestionModalProps {
 }
 
 export default function QuestionModal({open, questionConfig, isInPrison, step, setStep, handleClose, setIsInPrison}: QestionModalProps): JSX.Element {
-// console.log('fff', questionConfig.options);
-// const [isInPrison, setIsInPrison] = useState(false);
-
 
 const handleAnswerOptionClick = (isCorrect: boolean): void => {
     if (isCorrect) {
@@ -47,20 +45,22 @@ const handleHardAnswerOptionClick = (isCorrect: boolean): void => {
     handleClose();
     setIsInPrison(false);
     console.log('hard No ok');
-}
+  }
 }
 
   return (
     <Dialog
         open={open}
         onClose={handleClose}
+        fullWidth={true}
+        maxWidth="md"
       >
         <DialogTitle>
           {questionConfig.title}
         </DialogTitle>
         <DialogContent>
-          {questionConfig.description}
-          <img src={questionConfig.imgUrl} ></img>
+          {questionConfig.description && <Typography mb={2}>{questionConfig.description}</Typography>}
+          <QuestionImageModal src={questionConfig.imgUrl}></QuestionImageModal>
 
           {/* INFO: Options */}
           {!isInPrison && (
