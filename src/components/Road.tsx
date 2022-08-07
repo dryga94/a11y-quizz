@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 import { useEffect, useState } from 'react';
 import { IQuestion } from '../interfaces/questions';
@@ -29,21 +29,40 @@ export default function Road({ questionConfig, prisonConfig }: IProps): JSX.Elem
 
   return (
     <Box>
-      <Button variant="contained" onClick={handleOpen}>
-        Open modal
-      </Button>
+      <Box position="relative">
+        <Stack>
+          {Array.from(Array(8).keys())
+            .reverse()
+            .map((stepNum) => (
+              <Box
+                boxSizing="border-box"
+                width={1}
+                height="11vh"
+                border="1px solid red"
+                key={stepNum}
+              >
+                Step {stepNum}
+              </Box>
+            ))}
+        </Stack>
+        <Character isInPrison={isInPrison} activeStep={step} />
+      </Box>
+      <Stack direction="row">
+        <Button variant="contained" onClick={handleOpen}>
+          OM
+        </Button>
+
+        <Button onClick={() => setIsInPrison(!isInPrison)}>SP</Button>
+        <Button onClick={() => setStep((prev) => (prev < 7 ? (isInPrison ? prev : prev + 1) : 0))}>
+          NS
+        </Button>
+      </Stack>
+
       <QuestionModal
         open={open}
         handleClose={handleClose}
         questionConfig={activeQuestion || questionConfig[0]}
       ></QuestionModal>
-
-      <Typography>{step}</Typography>
-      <Button onClick={() => setIsInPrison(!isInPrison)}>Move to prison</Button>
-      <Button onClick={() => setStep((prev) => (prev < 7 ? (isInPrison ? prev : prev + 1) : 0))}>
-        Go to next step
-      </Button>
-      <Character isInPrison={isInPrison} activeStep={step} />
     </Box>
   );
 }

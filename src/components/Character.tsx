@@ -9,11 +9,14 @@ export default function Character({ isInPrison, activeStep }: IProps): JSX.Eleme
   return (
     <Box
       sx={{
-        width: '10vh',
-        height: '10vh',
+        position: 'absolute',
+        left: '4vw',
+        bottom: '1.5vh',
+        width: '8vh',
+        height: '8vh',
         bgcolor: isInPrison ? 'error.main' : 'primary.main',
         color: '#FFF',
-        transform: `translateX(${activeStep * 10}vw)`,
+        transform: `translateY(-${activeStep * 11}vh)`,
         transition: '0.3s ease',
       }}
     >
