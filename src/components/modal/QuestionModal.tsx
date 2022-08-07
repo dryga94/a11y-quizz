@@ -3,7 +3,11 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { IQuestion } from '../../interfaces/questions';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import { IAnswer, IQuestion } from '../../interfaces/questions';
 
 interface QestionModalProps {
   open: boolean;
@@ -12,7 +16,7 @@ interface QestionModalProps {
 }
 
 export default function QuestionModal({open, handleClose, questionConfig}: QestionModalProps): JSX.Element {
-// console.log('fff', questionConfig)
+console.log('fff', questionConfig.options)
 
   return (
     <Dialog
@@ -25,11 +29,23 @@ export default function QuestionModal({open, handleClose, questionConfig}: Qesti
         <DialogContent>
           {questionConfig.description}
           <img src={questionConfig.imgUrl} ></img>
+
+          {/* INFO: Options */}
+          <List>
+            {questionConfig?.options?.map((answerOption, key) => (
+              <ListItem disablePadding key={key}>
+                <ListItemButton>
+                  <ListItemText primary={answerOption.title} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
         </DialogContent>
+
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
+          <Button variant="contained" color="error" onClick={handleClose}>Wrong answer</Button>
+          <Button variant="contained" color="success" onClick={handleClose} autoFocus>
+            Correct answer
           </Button>
         </DialogActions>
       </Dialog>
