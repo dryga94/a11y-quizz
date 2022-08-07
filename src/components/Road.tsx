@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
 import { useEffect, useState } from 'react';
+import { FIELD_HEIGHT_VH } from '../constants/battle-field-size';
 import { IQuestion } from '../interfaces/questions';
 import Character from './Character';
 import QuestionModal from './modal/QuestionModal';
@@ -37,7 +38,7 @@ export default function Road({ questionConfig, prisonConfig }: IProps): JSX.Elem
               <Box
                 boxSizing="border-box"
                 width={1}
-                height="11vh"
+                height={`${FIELD_HEIGHT_VH}vh`}
                 border="1px solid red"
                 key={stepNum}
               >

@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { CHARACTER_SIZE, FIELD_HEIGHT_VH } from '../constants/battle-field-size';
 
 interface IProps {
   isInPrison: boolean;
@@ -10,13 +11,13 @@ export default function Character({ isInPrison, activeStep }: IProps): JSX.Eleme
     <Box
       sx={{
         position: 'absolute',
-        left: '4vw',
-        bottom: '1.5vh',
-        width: '8vh',
-        height: '8vh',
+        left: '50%',
+        bottom: `${(FIELD_HEIGHT_VH - CHARACTER_SIZE) / 2}vh`,
+        width: `${CHARACTER_SIZE}vh`,
+        height: `${CHARACTER_SIZE}vh`,
         bgcolor: isInPrison ? 'error.main' : 'primary.main',
         color: '#FFF',
-        transform: `translateY(-${activeStep * 11}vh)`,
+        transform: `translateY(-${activeStep * FIELD_HEIGHT_VH}vh) translateX(-50%)`,
         transition: '0.3s ease',
       }}
     >
