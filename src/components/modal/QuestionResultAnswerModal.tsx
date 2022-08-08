@@ -9,11 +9,11 @@ interface QuestionImageModalProps {
 
 export default function QuestionResultAnswerModal({isWrongAnswer}: QuestionImageModalProps): JSX.Element {
 const srcImg = isWrongAnswer ? '/img/bad.gif' : '/img/win.gif';
-const title = isWrongAnswer ? 'False' : 'True';
+const title = isWrongAnswer ? 'NOOOOOOOOOOOOOOOO' : 'YEEEEEEEEEEEEEEEES';
 
   return (
     <>
-      <DialogTitle>{title}</DialogTitle>
+      <DialogTitle sx={{textAlign: 'center'}}>{title}</DialogTitle>
       <DialogContent>
         <QuestionImageModal src={srcImg}></QuestionImageModal>
       </DialogContent>

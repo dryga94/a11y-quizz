@@ -16,7 +16,7 @@ export default function BattleField(): JSX.Element {
   };
   return (
     <Container>
-      <Typography variant="h3">This is the battlefield</Typography>
+      <Typography variant="h3" textAlign="center" mb={2}>This is the battlefield</Typography>
       <Stack
         minHeight="88vh"
         display="grid"
