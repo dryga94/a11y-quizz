@@ -8,8 +8,10 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { IQuestion } from '../../interfaces/questions';
+import { useState } from 'react';
+import { IAnswer, IQuestion } from '../../interfaces/questions';
 import QuestionImageModal from './QuestionImageModal';
+import QuestionResultAnswerModal from './QuestionResultAnswerModal';
 
 interface QestionModalProps {
   open: boolean;
@@ -29,23 +31,91 @@ export default function QuestionModal({
   handleClose,
   setIsInPrison,
 }: QestionModalProps): JSX.Element {
-  const handleAnswerOptionClick = (isCorrect: boolean): void => {
-    handleClose();
-    setIsInPrison(!isCorrect);
+
+  // TODO: Optimize logic
+
+  const [showResultAnswer, setShowResultAnswer] = useState(false);
+  const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
+
+
+  const handleAnswerOptionClick = (isCorrect: IAnswer): void => {
+    const isCorrectValue = !!isCorrect.isCorrect;
+    console.log(isCorrectValue);
+    setIsInPrison(!isCorrectValue);
     setIsAbleToAnswer(false);
+    setIsCorrectAnswer(isCorrectValue);
+    setShowResultAnswer(true);
+
+    setTimeout(() => {
+      handleClose();
+      setShowResultAnswer(false);
+    }, 2000);
   };
 
   const handleHardAnswerOptionClick = (isCorrect: boolean): void => {
     if (isCorrect) {
-      handleClose();
       setIsInPrison(false);
       setIsAbleToAnswer(true);
+      setIsCorrectAnswer(true);
+      setShowResultAnswer(true);
+      setTimeout(() => {
+        handleClose();
+      }, 2000);
     } else {
-      handleClose();
       setIsInPrison(false);
       setIsAbleToAnswer(false);
+      setIsCorrectAnswer(false);
+      setShowResultAnswer(true);
+      setTimeout(() => {
+        handleClose();
+      }, 2000);
     }
   };
+
+  const ModalBody = (): JSX.Element => {
+      return (
+        <>
+          <DialogTitle>{questionConfig.title} </DialogTitle>
+          <DialogContent>
+            {questionConfig.description && <Typography mb={2}>{questionConfig.description}</Typography>}
+            <QuestionImageModal src={questionConfig.imgUrl}></QuestionImageModal>
+
+            {/* INFO: Options */}
+            {!isInPrison && (
+              <List>
+                {questionConfig?.options?.map((answerOption: IAnswer, key) => (
+                  <ListItem disablePadding key={key}>
+                    <ListItemButton onClick={() => handleAnswerOptionClick(answerOption)}>
+                      <ListItemText primary={`${key + 1}) ${answerOption.title}`} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            )}
+          </DialogContent>
+
+          {isInPrison && (
+            <DialogActions>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => handleHardAnswerOptionClick(false)}
+              >
+                Wrong answer
+              </Button>
+              <Button
+                variant="contained"
+                color="success"
+                onClick={() => handleHardAnswerOptionClick(true)}
+                autoFocus
+              >
+                Correct answer
+              </Button>
+            </DialogActions>
+          )}
+        </>
+      );
+    }
 
   return (
     <Dialog
@@ -55,44 +125,8 @@ export default function QuestionModal({
       disableEscapeKeyDown
       onBackdropClick={(e) => e.preventDefault()}
     >
-      <DialogTitle>{questionConfig.title}</DialogTitle>
-      <DialogContent>
-        {questionConfig.description && <Typography mb={2}>{questionConfig.description}</Typography>}
-        <QuestionImageModal src={questionConfig.imgUrl}></QuestionImageModal>
 
-        {/* INFO: Options */}
-        {!isInPrison && (
-          <List>
-            {questionConfig?.options?.map((answerOption, key) => (
-              <ListItem disablePadding key={key}>
-                <ListItemButton onClick={() => handleAnswerOptionClick(answerOption.isCorrect!)}>
-                  <ListItemText primary={`${key + 1}) ${answerOption.title}`} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        )}
-      </DialogContent>
-
-      {isInPrison && (
-        <DialogActions>
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() => handleHardAnswerOptionClick(false)}
-          >
-            Wrong answer
-          </Button>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={() => handleHardAnswerOptionClick(true)}
-            autoFocus
-          >
-            Correct answer
-          </Button>
-        </DialogActions>
-      )}
+      {showResultAnswer ? <QuestionResultAnswerModal isWrongAnswer={!isCorrectAnswer} /> : <ModalBody />}
     </Dialog>
   );
 }
