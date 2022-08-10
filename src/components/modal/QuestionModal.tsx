@@ -31,24 +31,23 @@ export default function QuestionModal({
   handleClose,
   setIsInPrison,
 }: QestionModalProps): JSX.Element {
-
   // TODO: Optimize logic
 
   const [showResultAnswer, setShowResultAnswer] = useState(false);
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
-
 
   const handleAnswerOptionClick = (isCorrect: IAnswer): void => {
     const isCorrectValue = !!isCorrect.isCorrect;
     console.log(isCorrectValue);
     setIsInPrison(!isCorrectValue);
     setIsAbleToAnswer(false);
+
     setIsCorrectAnswer(isCorrectValue);
     setShowResultAnswer(true);
 
     setTimeout(() => {
-      handleClose();
       setShowResultAnswer(false);
+      handleClose();
     }, 2000);
   };
 
@@ -73,49 +72,51 @@ export default function QuestionModal({
   };
 
   const ModalBody = (): JSX.Element => {
-      return (
-        <>
-          <DialogTitle>{questionConfig.title} </DialogTitle>
-          <DialogContent>
-            {questionConfig.description && <Typography mb={2}>{questionConfig.description}</Typography>}
-            <QuestionImageModal src={questionConfig.imgUrl}></QuestionImageModal>
-
-            {/* INFO: Options */}
-            {!isInPrison && (
-              <List>
-                {questionConfig?.options?.map((answerOption: IAnswer, key) => (
-                  <ListItem disablePadding key={key}>
-                    <ListItemButton onClick={() => handleAnswerOptionClick(answerOption)}>
-                      <ListItemText primary={`${key + 1}) ${answerOption.title}`} />
-                    </ListItemButton>
-                  </ListItem>
-                ))}
-              </List>
-            )}
-          </DialogContent>
-
-          {isInPrison && (
-            <DialogActions>
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => handleHardAnswerOptionClick(false)}
-              >
-                Wrong answer
-              </Button>
-              <Button
-                variant="contained"
-                color="success"
-                onClick={() => handleHardAnswerOptionClick(true)}
-                autoFocus
-              >
-                Correct answer
-              </Button>
-            </DialogActions>
+    return (
+      <>
+        <DialogTitle>{questionConfig.title} </DialogTitle>
+        <DialogContent>
+          {questionConfig.description && (
+            <Typography mb={2}>{questionConfig.description}</Typography>
           )}
-        </>
-      );
-    }
+          <QuestionImageModal src={questionConfig.imgUrl}></QuestionImageModal>
+
+          {/* INFO: Options */}
+          {!isInPrison && (
+            <List>
+              {questionConfig?.options?.map((answerOption: IAnswer, key) => (
+                <ListItem disablePadding key={key}>
+                  <ListItemButton onClick={() => handleAnswerOptionClick(answerOption)}>
+                    <ListItemText primary={`${key + 1}) ${answerOption.title}`} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </DialogContent>
+
+        {isInPrison && (
+          <DialogActions>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => handleHardAnswerOptionClick(false)}
+            >
+              Wrong answer
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => handleHardAnswerOptionClick(true)}
+              autoFocus
+            >
+              Correct answer
+            </Button>
+          </DialogActions>
+        )}
+      </>
+    );
+  };
 
   return (
     <Dialog
@@ -125,8 +126,11 @@ export default function QuestionModal({
       disableEscapeKeyDown
       onBackdropClick={(e) => e.preventDefault()}
     >
-
-      {showResultAnswer ? <QuestionResultAnswerModal isWrongAnswer={!isCorrectAnswer} /> : <ModalBody />}
+      {showResultAnswer ? (
+        <QuestionResultAnswerModal isWrongAnswer={!isCorrectAnswer} />
+      ) : (
+        <ModalBody />
+      )}
     </Dialog>
   );
 }

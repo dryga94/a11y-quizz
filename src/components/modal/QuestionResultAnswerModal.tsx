@@ -1,6 +1,5 @@
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import Box from '@mui/material/Box';
 import QuestionImageModal from './QuestionImageModal';
 
 interface QuestionImageModalProps {

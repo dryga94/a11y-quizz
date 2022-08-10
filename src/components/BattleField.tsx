@@ -1,8 +1,22 @@
-import { Button, Stack, Typography } from '@mui/material';
-import Container from '@mui/material/Container';
+import { Box, Button, Stack } from '@mui/material';
 import { useState } from 'react';
 import { serhiiConfig, serhiiProConfig } from '../configs/serhiiSQuestionConfig';
+import { FIELDS_COUNT } from '../constants/battle-field-size';
 import Road from './Road';
+
+const staticFieldStyles = {
+  position: 'fixed',
+  width: '60vw',
+  right: 0,
+  top: 0,
+  height: `${100 / FIELDS_COUNT}vh`,
+  bgcolor: '#FFF',
+  fontSize: 40,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  zIndex: 2,
+};
 
 export default function BattleField(): JSX.Element {
   const [gameIsStarted, setGameIsStarted] = useState(false);
@@ -15,34 +29,41 @@ export default function BattleField(): JSX.Element {
     setActiveRoad((prev) => (prev < 2 ? prev + 1 : 0));
   };
   return (
-    <Container>
-      <Typography variant="h3" textAlign="center" mb={2}>This is the battlefield</Typography>
+    <Stack direction="row" justifyContent="flex-end">
+      <Box flex={1} bgcolor="#EDE7E2">
+        <Button onClick={handleMove}>
+          {gameIsStarted ? 'Ready for the next turn' : 'Start the battle'}
+        </Button>
+      </Box>
+      <Box sx={{ ...staticFieldStyles, bottom: 0, top: 'auto' }}>Start</Box>
+      <Box sx={{ ...staticFieldStyles }}>Finish</Box>
       <Stack
-        minHeight="88vh"
+        minHeight="100vh"
         display="grid"
-        gridTemplateColumns="repeat(3, 14vw)"
+        gridTemplateColumns="repeat(3, 20vw)"
         justifyContent="center"
-        gap={3}
       >
         <Road
           prisonConfig={serhiiProConfig}
           questionConfig={serhiiConfig}
           isActive={activeRoad === 0}
+          color="#80B4F0"
+          position="left"
         />
         <Road
           prisonConfig={serhiiProConfig}
           questionConfig={serhiiConfig}
           isActive={activeRoad === 1}
+          color="#FFB7B7"
         />
         <Road
           prisonConfig={serhiiProConfig}
           questionConfig={serhiiConfig}
           isActive={activeRoad === 2}
+          color="#C3ABE1"
+          position="right"
         />
       </Stack>
-      <Button sx={{ position: 'absolute', top: '50%', right: 100 }} onClick={handleMove}>
-        {gameIsStarted ? 'Ready for the next turn' : 'Start the battle'}
-      </Button>
-    </Container>
+    </Stack>
   );
 }
