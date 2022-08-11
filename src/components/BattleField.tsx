@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { serhiiConfig, serhiiProConfig } from '../configs/serhiiSQuestionConfig';
 import { FIELDS_COUNT } from '../constants/battle-field-size';
 import Road from './Road';
+import Rules from './Rules';
 
 const staticFieldStyles = {
   position: 'fixed',
@@ -30,10 +31,13 @@ export default function BattleField(): JSX.Element {
   };
   return (
     <Stack direction="row" justifyContent="flex-end">
-      <Box flex={1} bgcolor="#EDE7E2">
-        <Button onClick={handleMove}>
-          {gameIsStarted ? 'Ready for the next turn' : 'Start the battle'}
-        </Button>
+      <Box flex={1} bgcolor="#EDE7E2" p={(theme) => theme.spacing(11, 8, 10, 8)}>
+        <Stack height={1}>
+          {gameIsStarted ? "<QuestionContent>" : <Rules />}
+          <Button variant="contained" onClick={handleMove} sx={{mt: "auto"}}>
+            {gameIsStarted ? 'NEXT' : 'Start the battle'}
+          </Button>
+        </Stack>
       </Box>
       <Box sx={{ ...staticFieldStyles, bottom: 0, top: 'auto' }}>Start</Box>
       <Box sx={{ ...staticFieldStyles }}>Finish</Box>
