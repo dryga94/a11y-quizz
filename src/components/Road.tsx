@@ -3,6 +3,7 @@ import Stack from '@mui/material/Stack';
 
 import { useEffect, useState } from 'react';
 import { FIELDS_COUNT } from '../constants/battle-field-size';
+import { ICharacter } from '../interfaces/character';
 import { IQuestion } from '../interfaces/questions';
 import Character from './Character';
 import QuestionModal from './modal/QuestionModal';
@@ -13,6 +14,7 @@ interface IProps {
   isActive: boolean;
   color?: string;
   position?: 'left' | 'right';
+  character: ICharacter;
 }
 
 export default function Road({
@@ -21,6 +23,7 @@ export default function Road({
   color,
   position,
   isActive,
+  character,
 }: IProps): JSX.Element {
   const [step, setStep] = useState(0);
   const [isInPrison, setIsInPrison] = useState(false);
@@ -64,10 +67,9 @@ export default function Road({
                 bgcolor={stepNum > step ? '#F1ECE9' : color}
                 sx={{
                   fontSize: 40,
-                  justifyContent: 'flex-end',
+                  justifyContent: 'center',
                   display: 'flex',
                   alignItems: 'center',
-                  paddingRight: '30%',
                   color: '#787878',
                   border: '0.5px solid #000',
                   borderLeftWidth: position === 'left' ? '0' : '0.5px',
@@ -78,7 +80,7 @@ export default function Road({
               </Box>
             ))}
         </Stack>
-        <Character isInPrison={isInPrison} activeStep={step} />
+        <Character isInPrison={isInPrison} activeStep={step}  character={character}/>
       </Box>
 
       <QuestionModal

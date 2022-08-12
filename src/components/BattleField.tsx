@@ -1,5 +1,6 @@
 import { Box, Button, Stack } from '@mui/material';
 import { useState } from 'react';
+import { characterConfig } from '../configs/character.config';
 import { serhiiConfig, serhiiProConfig } from '../configs/serhiiSQuestionConfig';
 import { FIELDS_COUNT } from '../constants/battle-field-size';
 import Road from './Road';
@@ -53,12 +54,14 @@ export default function BattleField(): JSX.Element {
           isActive={activeRoad === 0}
           color="#80B4F0"
           position="left"
+          character={characterConfig[0]}
         />
         <Road
           prisonConfig={serhiiProConfig}
           questionConfig={serhiiConfig}
           isActive={activeRoad === 1}
           color="#FFB7B7"
+          character={characterConfig[1]}
         />
         <Road
           prisonConfig={serhiiProConfig}
@@ -66,6 +69,7 @@ export default function BattleField(): JSX.Element {
           isActive={activeRoad === 2}
           color="#C3ABE1"
           position="right"
+          character={characterConfig[2]}
         />
       </Stack>
     </Stack>
