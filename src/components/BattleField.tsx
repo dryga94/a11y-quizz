@@ -1,10 +1,9 @@
 import { Box, Button, Stack } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { serhiiConfig } from '../configs/serhiiSQuestionConfig';
 import { characterConfig } from '../configs/character.config';
 import { FIELDS_COUNT } from '../constants/battle-field-size';
-import { IQuestion } from '../interfaces/questions';
-import { IActiveRoadInfo } from '../interfaces/roads';
+import { EUser, getIndexFromEUser, IUsersState, IUserState } from '../interfaces/roads';
 import QuestionContent from './question/QuestionContent';
 import Road from './Road';
 import Rules from './Rules';
@@ -26,28 +25,75 @@ const staticFieldStyles = {
 export default function BattleField(): JSX.Element {
   const [gameIsStarted, setGameIsStarted] = useState(false);
   const [activeRoad, setActiveRoad] = useState(-1);
-  const [isInPrison, setIsInPrison] = useState(false);
+  const [activeQuestion, setActiveQuestion] = useState(serhiiConfig[0].defaultQuestions[0]);
 
-  const [activeRoadInfo, setActiveRoadInfo] = useState<IActiveRoadInfo>({
-    question: serhiiConfig[0].defaultQuestions[0],
-    isInPrison: isInPrison,
-    setIsInPrison
-  });
+  const [usersState, setUsersState] = useState<IUsersState>();
 
   const handleMove = (): void => {
     if (!gameIsStarted) {
       setGameIsStarted(true);
     }
+    console.log(usersState);
+    if (usersState?.[getIndexFromEUser(activeRoad)]?.isAbleToAnswer) {
+      return;
+    }
     setActiveRoad((prev) => (prev < 2 ? prev + 1 : 0));
   };
 
-console.log('activeRoad', activeRoad);
+  const handleChangeUsersState = (index: EUser, userState: IUserState): void => {
+    setUsersState(
+      (prev) =>
+        ({
+          ...prev,
+          //   [index]: { ...userState, isAbleToAnswer: prev?.[index]?.isAbleToAnswer },
+          [index]: userState,
+        } as IUsersState),
+    );
+  };
+
+  const updateStateOnQuestionAnswer = (
+    index: EUser,
+    isInPrison: boolean,
+    isAbleToAnswer: boolean,
+  ): void => {
+    setUsersState(
+      (prev) =>
+        ({
+          ...prev,
+          [index]: {
+            isInPrison: isInPrison,
+            isAbleToAnswer: isAbleToAnswer,
+          },
+        } as IUsersState),
+    );
+  };
+
+  useEffect(() => {
+    const config = usersState?.[getIndexFromEUser(activeRoad)]?.isInPrison
+      ? 'prisonQuestions'
+      : 'defaultQuestions';
+    setActiveQuestion(
+      serhiiConfig[activeRoad === -1 ? 0 : activeRoad][config][
+        usersState?.[getIndexFromEUser(activeRoad)]?.activeStep || 0
+      ],
+    );
+  }, [activeRoad, usersState, getIndexFromEUser]);
+
+  console.log('activeRoad', activeRoad);
   return (
     <Stack direction="row" justifyContent="flex-end">
       <Box flex={1} bgcolor="#EDE7E2" p={(theme) => theme.spacing(11, 8, 10, 8)}>
         <Stack height={1}>
-          {gameIsStarted ? <QuestionContent activeRoadInfo={activeRoadInfo} activeRoad={activeRoad} /> : <Rules />}
-          <Button variant="contained" onClick={handleMove} sx={{mt: "auto"}}>
+          {gameIsStarted ? (
+            <QuestionContent
+              activeRoad={activeRoad}
+              activeQuestion={activeQuestion}
+              setUserState={updateStateOnQuestionAnswer}
+            />
+          ) : (
+            <Rules />
+          )}
+          <Button variant="contained" onClick={handleMove} sx={{ mt: 'auto' }}>
             {gameIsStarted ? 'NEXT' : 'Start the battle'}
           </Button>
         </Stack>
@@ -61,30 +107,30 @@ console.log('activeRoad', activeRoad);
         justifyContent="center"
       >
         <Road
-          questionConfig={serhiiConfig[0].defaultQuestions}
-          prisonConfig={serhiiConfig[0].prisonQuestions}
           isActive={activeRoad === 0}
           color="#80B4F0"
           position="left"
-          setActiveRoadInfo={setActiveRoadInfo}
+          activeRoad={0}
           character={characterConfig[0]}
+          setUserState={handleChangeUsersState}
+          isInPrison={usersState?.[0]?.isInPrison || false}
         />
         <Road
-          questionConfig={serhiiConfig[1].defaultQuestions}
-          prisonConfig={serhiiConfig[1].prisonQuestions}
           isActive={activeRoad === 1}
           color="#FFB7B7"
-          setActiveRoadInfo={setActiveRoadInfo}
+          activeRoad={1}
           character={characterConfig[1]}
+          setUserState={handleChangeUsersState}
+          isInPrison={usersState?.[1]?.isInPrison || false}
         />
         <Road
-          questionConfig={serhiiConfig[2].defaultQuestions}
-          prisonConfig={serhiiConfig[2].prisonQuestions}
           isActive={activeRoad === 2}
           color="#C3ABE1"
           position="right"
-          setActiveRoadInfo={setActiveRoadInfo}
+          activeRoad={2}
           character={characterConfig[2]}
+          setUserState={handleChangeUsersState}
+          isInPrison={usersState?.[2]?.isInPrison || false}
         />
       </Stack>
     </Stack>

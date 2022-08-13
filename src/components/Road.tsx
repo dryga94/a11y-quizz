@@ -4,61 +4,43 @@ import Stack from '@mui/material/Stack';
 import { useEffect, useState } from 'react';
 import { FIELDS_COUNT } from '../constants/battle-field-size';
 import { ICharacter } from '../interfaces/character';
-import { IQuestion } from '../interfaces/questions';
-import { IActiveRoadInfo } from '../interfaces/roads';
+import { IUserState } from '../interfaces/roads';
 import Character from './Character';
-import QuestionModal from './modal/QuestionModal';
-
-
 
 interface IProps {
-  questionConfig: IQuestion[];
-  prisonConfig: IQuestion[];
   isActive: boolean;
   color?: string;
   position?: 'left' | 'right';
-  setActiveRoadInfo({
-    question: question,
-    setIsInPrison,
-  }: IActiveRoadInfo): void;
+  activeRoad: number;
+  isInPrison: boolean;
   character: ICharacter;
+  setUserState(activeRoad: number, userState: IUserState): void;
 }
 
 export default function Road({
-  questionConfig,
-  prisonConfig,
   color,
   position,
   isActive,
-  setActiveRoadInfo,
+  isInPrison,
+  activeRoad,
   character,
+  setUserState,
 }: IProps): JSX.Element {
   const [step, setStep] = useState(0);
-  const [isInPrison, setIsInPrison] = useState(false);
-  const [isAbleToAnswer, setIsAbleToAnswer] = useState(true);
-
-  const [open, setOpen] = useState(false);
-  // const [activeQuestion, setActiveQuestion] = useState<IQuestion>(questionConfig[0]);
-  const handleOpen = (): void => setOpen(true);
-  // const handleClose = (): void => setOpen(false);
 
   useEffect(() => {
-    if (isActive && isAbleToAnswer) {
+    if (isActive) {
       if (!isInPrison) {
         setStep((prev) => prev + 1);
       }
-      setTimeout(handleOpen, 1000);
     }
   }, [isActive, isInPrison]);
 
   useEffect(() => {
-    if (!isActive) {
-      setIsAbleToAnswer(true);
-    }
     if (step > 0) {
-      setActiveRoadInfo({
-        question: isInPrison ? prisonConfig[step - 1] : questionConfig[step - 1],
-        setIsInPrison,
+      setUserState(activeRoad, {
+        isInPrison,
+        activeStep: step - 1,
       });
     }
   }, [step, isInPrison, isActive]);
@@ -91,17 +73,8 @@ export default function Road({
               </Box>
             ))}
         </Stack>
-        <Character isInPrison={isInPrison} activeStep={step}  character={character}/>
+        <Character isInPrison={isInPrison} activeStep={step} character={character} />
       </Box>
-
-      {/* <QuestionModal
-        open={open}
-        isInPrison={isInPrison}
-        setIsAbleToAnswer={setIsAbleToAnswer}
-        handleClose={handleClose}
-        setIsInPrison={setIsInPrison}
-        questionConfig={activeQuestion || questionConfig[0]}
-      ></QuestionModal> */}
     </Box>
   );
 }
