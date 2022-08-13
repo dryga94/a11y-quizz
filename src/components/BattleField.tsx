@@ -1,6 +1,7 @@
 import { Box, Button, Stack } from '@mui/material';
 import { useState } from 'react';
 import { serhiiConfig } from '../configs/serhiiSQuestionConfig';
+import { characterConfig } from '../configs/character.config';
 import { FIELDS_COUNT } from '../constants/battle-field-size';
 import { IQuestion } from '../interfaces/questions';
 import { IActiveRoadInfo } from '../interfaces/roads';
@@ -66,6 +67,7 @@ console.log('activeRoad', activeRoad);
           color="#80B4F0"
           position="left"
           setActiveRoadInfo={setActiveRoadInfo}
+          character={characterConfig[0]}
         />
         <Road
           questionConfig={serhiiConfig[1].defaultQuestions}
@@ -73,6 +75,7 @@ console.log('activeRoad', activeRoad);
           isActive={activeRoad === 1}
           color="#FFB7B7"
           setActiveRoadInfo={setActiveRoadInfo}
+          character={characterConfig[1]}
         />
         <Road
           questionConfig={serhiiConfig[2].defaultQuestions}
@@ -81,6 +84,7 @@ console.log('activeRoad', activeRoad);
           color="#C3ABE1"
           position="right"
           setActiveRoadInfo={setActiveRoadInfo}
+          character={characterConfig[2]}
         />
       </Stack>
     </Stack>
