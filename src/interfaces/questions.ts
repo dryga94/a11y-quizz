@@ -11,3 +11,8 @@ export interface IQuestion {
   imgUrl?: string;
   options?: IAnswer[];
 }
+
+export interface IQuestions {
+  defaultQuestions: IQuestion[];
+  prisonQuestions: IQuestion[];
+}

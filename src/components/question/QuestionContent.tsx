@@ -1,86 +1,72 @@
-import { Box, Typography } from '@mui/material';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import { useState } from 'react';
-import { IAnswer, IQuestion } from '../../interfaces/questions';
+import { Box, Button, List, ListItem, ListItemButton, ListItemText, Stack, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { IQuestion, IAnswer } from '../../interfaces/questions';
+import { IActiveRoadInfo } from '../../interfaces/roads';
 import QuestionImage from './QuestionImage';
 import QuestionResultAnswer from './QuestionResultAnswer';
 
-interface QuestionContentProps {
-  open: boolean;
-  isInPrison: boolean;
-  isAbleToAnswer?: boolean;
-  questionConfig: IQuestion;
-  handleClose(): void;
-  setIsAbleToAnswer(e: boolean): void;
-  setIsInPrison(e: boolean): void;
+interface IQuestionContentProps {
+  activeRoadInfo: IActiveRoadInfo;
+  activeRoad: number;
+}
+
+interface IShowResultAnswer {
+  isFirsteState: boolean;
+  isCorrectAnswer: boolean;
 }
 
 export default function QuestionContent({
-  questionConfig,
-  isInPrison,
-  setIsAbleToAnswer,
-  handleClose,
-  setIsInPrison,
-}: QuestionContentProps): JSX.Element {
-  // TODO: Optimize logic
+  activeRoadInfo,
+  activeRoad,
+}: IQuestionContentProps): JSX.Element {
 
-  const [showResultAnswer, setShowResultAnswer] = useState(false);
-  const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
+  const [showResultAnswer, setShowResultAnswer] = useState<IShowResultAnswer>({isFirsteState: true, isCorrectAnswer: true});
+  console.log('activeRoadQQQQ', activeRoad);
+  const resultAnswer = (isCorrect: boolean): void => {
+    if (isCorrect) {
+      setShowResultAnswer({isFirsteState: false, isCorrectAnswer: true});
+    }
+    else {
+      setShowResultAnswer({isFirsteState: false, isCorrectAnswer: false});
+    }
+  }
 
   const handleAnswerOptionClick = (isCorrect: IAnswer): void => {
     const isCorrectValue = !!isCorrect.isCorrect;
-    console.log(isCorrectValue);
-    setIsInPrison(!isCorrectValue);
-    setIsAbleToAnswer(false);
+    activeRoadInfo.setIsInPrison?.(!isCorrectValue);
 
-    setIsCorrectAnswer(isCorrectValue);
-    setShowResultAnswer(true);
+    resultAnswer(isCorrectValue);
+    console.log('isCorrect content', isCorrect);
 
-    setTimeout(() => {
-      setShowResultAnswer(false);
-      handleClose();
-    }, 2000);
   };
 
-  // const handleHardAnswerOptionClick = (isCorrect: boolean): void => {
-  //   if (isCorrect) {
-  //     setIsInPrison(false);
-  //     setIsAbleToAnswer(true);
-  //     setIsCorrectAnswer(true);
-  //     setShowResultAnswer(true);
-  //     setTimeout(() => {
-  //       handleClose();
-  //     }, 2000);
-  //   } else {
-  //     setIsInPrison(false);
-  //     setIsAbleToAnswer(false);
-  //     setIsCorrectAnswer(false);
-  //     setShowResultAnswer(true);
-  //     setTimeout(() => {
-  //       handleClose();
-  //     }, 2000);
-  //   }
-  // };
+  const handleHardAnswerOptionClick = (isCorrect: boolean): void => {
+    resultAnswer(isCorrect);
+    activeRoadInfo.setIsInPrison?.(false);
+
+    if (isCorrect) {
+      setShowResultAnswer({isFirsteState: false, isCorrectAnswer: true});
+    }
+    else {
+      setShowResultAnswer({isFirsteState: false, isCorrectAnswer: false});
+    }
+  };
+
+  useEffect(() => {
+    setShowResultAnswer({isFirsteState: true, isCorrectAnswer: false});
+  }, [activeRoad]);
 
   const QuestionBody = (): JSX.Element => {
     return (
       <>
-        <DialogTitle>{questionConfig.title} </DialogTitle>
-        <DialogContent>
-          {questionConfig.description && (
-            <Typography mb={2}>{questionConfig.description}</Typography>
-          )}
-          <QuestionImage src={questionConfig.imgUrl}></QuestionImage>
+        <Typography variant="h1" mb={4}>{activeRoadInfo.question?.title}</Typography>
+        <Typography mb={3}>{activeRoadInfo.question?.description}</Typography>
+          <QuestionImage src={activeRoadInfo.question?.imgUrl}></QuestionImage>
 
           {/* INFO: Options */}
-          {!isInPrison && (
+          {!!activeRoadInfo.question?.options && (
             <List>
-              {questionConfig?.options?.map((answerOption: IAnswer, key) => (
+              {activeRoadInfo.question?.options?.map((answerOption: IAnswer, key) => (
                 <ListItem disablePadding key={key}>
                   <ListItemButton onClick={() => handleAnswerOptionClick(answerOption)}>
                     <ListItemText primary={`${key + 1}) ${answerOption.title}`} />
@@ -89,20 +75,37 @@ export default function QuestionContent({
               ))}
             </List>
           )}
-        </DialogContent>
 
+        {activeRoadInfo.isInPrison && (
+          <Stack direction="row" gap={2}>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => handleHardAnswerOptionClick(false)}
+            >
+              Wrong answer
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => handleHardAnswerOptionClick(true)}
+              autoFocus
+            >
+              Correct answer
+            </Button>
+          </Stack>
+        )}
       </>
     );
   };
 
   return (
-    <Box>
-      {showResultAnswer ? (
-        <QuestionResultAnswer isWrongAnswer={!isCorrectAnswer} />
+    <Box display="grid">
+      {!showResultAnswer.isFirsteState ? (
+        <QuestionResultAnswer isCorrectAnswer={showResultAnswer.isCorrectAnswer} />
       ) : (
-        <QuestionBody></QuestionBody>
+        <QuestionBody />
       )}
-
     </Box>
   );
 }

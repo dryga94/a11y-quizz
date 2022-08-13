@@ -4,8 +4,11 @@ import Stack from '@mui/material/Stack';
 import { useEffect, useState } from 'react';
 import { FIELDS_COUNT } from '../constants/battle-field-size';
 import { IQuestion } from '../interfaces/questions';
+import { IActiveRoadInfo } from '../interfaces/roads';
 import Character from './Character';
 import QuestionModal from './modal/QuestionModal';
+
+
 
 interface IProps {
   questionConfig: IQuestion[];
@@ -13,6 +16,11 @@ interface IProps {
   isActive: boolean;
   color?: string;
   position?: 'left' | 'right';
+  setActiveRoadInfo({
+    question: question,
+    setIsInPrison,
+
+  }: IActiveRoadInfo): void;
 }
 
 export default function Road({
@@ -21,15 +29,16 @@ export default function Road({
   color,
   position,
   isActive,
+  setActiveRoadInfo,
 }: IProps): JSX.Element {
   const [step, setStep] = useState(0);
   const [isInPrison, setIsInPrison] = useState(false);
   const [isAbleToAnswer, setIsAbleToAnswer] = useState(true);
 
   const [open, setOpen] = useState(false);
-  const [activeQuestion, setActiveQuestion] = useState<IQuestion>(questionConfig[0]);
+  // const [activeQuestion, setActiveQuestion] = useState<IQuestion>(questionConfig[0]);
   const handleOpen = (): void => setOpen(true);
-  const handleClose = (): void => setOpen(false);
+  // const handleClose = (): void => setOpen(false);
 
   useEffect(() => {
     if (isActive && isAbleToAnswer) {
@@ -45,7 +54,10 @@ export default function Road({
       setIsAbleToAnswer(true);
     }
     if (step > 0) {
-      setActiveQuestion(isInPrison ? prisonConfig[step - 1] : questionConfig[step - 1]);
+      setActiveRoadInfo({
+        question: isInPrison ? prisonConfig[step - 1] : questionConfig[step - 1],
+        setIsInPrison,
+      });
     }
   }, [step, isInPrison, isActive]);
 
@@ -81,14 +93,14 @@ export default function Road({
         <Character isInPrison={isInPrison} activeStep={step} />
       </Box>
 
-      <QuestionModal
+      {/* <QuestionModal
         open={open}
         isInPrison={isInPrison}
         setIsAbleToAnswer={setIsAbleToAnswer}
         handleClose={handleClose}
         setIsInPrison={setIsInPrison}
         questionConfig={activeQuestion || questionConfig[0]}
-      ></QuestionModal>
+      ></QuestionModal> */}
     </Box>
   );
 }
