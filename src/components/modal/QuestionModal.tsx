@@ -38,7 +38,6 @@ export default function QuestionModal({
 
   const handleAnswerOptionClick = (isCorrect: IAnswer): void => {
     const isCorrectValue = !!isCorrect.isCorrect;
-    console.log(isCorrectValue);
     setIsInPrison(!isCorrectValue);
     setIsAbleToAnswer(false);
 

@@ -33,7 +33,6 @@ export default function BattleField(): JSX.Element {
     if (!gameIsStarted) {
       setGameIsStarted(true);
     }
-    console.log(usersState);
     if (usersState?.[getIndexFromEUser(activeRoad)]?.isAbleToAnswer) {
       return;
     }
@@ -45,8 +44,7 @@ export default function BattleField(): JSX.Element {
       (prev) =>
         ({
           ...prev,
-          //   [index]: { ...userState, isAbleToAnswer: prev?.[index]?.isAbleToAnswer },
-          [index]: userState,
+          [index]: { ...userState, isAbleToAnswer: prev?.[index]?.isAbleToAnswer },
         } as IUsersState),
     );
   };
@@ -66,6 +64,7 @@ export default function BattleField(): JSX.Element {
           },
         } as IUsersState),
     );
+    console.log(usersState);
   };
 
   useEffect(() => {
@@ -79,7 +78,6 @@ export default function BattleField(): JSX.Element {
     );
   }, [activeRoad, usersState, getIndexFromEUser]);
 
-  console.log('activeRoad', activeRoad);
   return (
     <Stack direction="row" justifyContent="flex-end">
       <Box flex={1} bgcolor="#EDE7E2" p={(theme) => theme.spacing(11, 8, 10, 8)}>
