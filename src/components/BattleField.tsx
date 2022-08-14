@@ -2,7 +2,7 @@ import { Box, Button, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { serhiiConfig } from '../configs/serhiiSQuestionConfig';
 import { characterConfig } from '../configs/character.config';
-import { FIELDS_COUNT } from '../constants/battle-field-size';
+import { FIELDS_COUNT, QUESTION_FOOTER_SIZE } from '../constants/battle-field-size';
 import { EUser, getIndexFromEUser, IUsersState, IUserState } from '../interfaces/roads';
 import QuestionContent from './question/QuestionContent';
 import Road from './Road';
@@ -83,21 +83,24 @@ export default function BattleField(): JSX.Element {
 
   return (
     <Stack direction="row" justifyContent="flex-end">
-      <Box flex={1} bgcolor="#EDE7E2" p={(theme) => theme.spacing(11, 8, 10, 8)}>
-        <Stack height={1}>
-          {gameIsStarted ? (
-            <QuestionContent
-              activeRoad={activeRoad}
-              activeQuestion={activeQuestion}
-              setUserState={updateStateOnQuestionAnswer}
-            />
-          ) : (
-            <Rules />
-          )}
-          <Button variant="contained" onClick={handleMove} sx={{ mt: 'auto' }}>
-            {gameIsStarted ? 'NEXT' : 'Start the battle'}
-          </Button>
-        </Stack>
+      <Box bgcolor="#EDE7E2" display="grid" gridTemplateRows="1fr max-content" width={1}>
+        {gameIsStarted ? (
+          <QuestionContent
+            activeRoad={activeRoad}
+            activeQuestion={activeQuestion}
+            setUserState={updateStateOnQuestionAnswer}
+            handleNextStep={handleMove}
+          />
+        ) : (
+          <Rules />
+        )}
+        {!gameIsStarted && (
+          <Box p={(theme) => theme.spacing(4, 7, 7, 7)}>
+            <Button variant="contained" fullWidth={true} onClick={handleMove} sx={{ mt: 'auto' }}>
+              Start the battle
+            </Button>
+          </Box>
+        )}
       </Box>
       <Box sx={{ ...staticFieldStyles, bottom: 0, top: 'auto' }}>Start</Box>
       <Box sx={{ ...staticFieldStyles }}>Finish</Box>
