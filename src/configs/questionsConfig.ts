@@ -1,5 +1,5 @@
-import { IQuestions } from './../interfaces/questions';
-export const serhiiConfig = [
+import { IQuestions } from '../interfaces/questions';
+export const QuestionsConfig = [
   {
     defaultQuestions: [
       {

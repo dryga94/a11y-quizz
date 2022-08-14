@@ -1,6 +1,6 @@
 import { Box, Button, Fade, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { serhiiConfig } from '../configs/serhiiSQuestionConfig';
+import { QuestionsConfig } from '../configs/questionsConfig';
 import { characterConfig } from '../configs/character.config';
 import { FIELDS_COUNT } from '../constants/battle-field-size';
 import { EUser, getIndexFromEUser, IUsersState, IUserState } from '../interfaces/roads';
@@ -31,7 +31,7 @@ export default function BattleField(): JSX.Element {
   const [isStartView, setIsStartView] = useState(true);
   const [activeRoad, setActiveRoad] = useState(-1);
   const [winner, setWinner] = useState<ICharacter>();
-  const [activeQuestion, setActiveQuestion] = useState(serhiiConfig[0].defaultQuestions[0]);
+  const [activeQuestion, setActiveQuestion] = useState(QuestionsConfig[0].defaultQuestions[0]);
 
   const [usersState, setUsersState] = useState<IUsersState>();
 
@@ -77,7 +77,7 @@ export default function BattleField(): JSX.Element {
       ? 'prisonQuestions'
       : 'defaultQuestions';
     setActiveQuestion(
-      serhiiConfig[activeRoad === -1 ? 0 : activeRoad][config][
+      QuestionsConfig[activeRoad === -1 ? 0 : activeRoad][config][
         usersState?.[getIndexFromEUser(activeRoad)]?.activeStep || 0
       ],
     );
@@ -98,7 +98,8 @@ export default function BattleField(): JSX.Element {
         )}
         {!gameIsStarted && (
           <Box p={(theme) => theme.spacing(4, 7, 7, 7)}>
-            <Button variant="contained" fullWidth={true} onClick={handleMove} sx={{ mt: 'auto' }}>
+            <Button variant="contained" size="large" fullWidth={true} onClick={handleMove} sx={{ mt: 'auto' }}>
+              <Box component="img" src="/img/arrow-right.svg" mr={2}></Box>
               Start the battle
             </Button>
           </Box>
@@ -126,7 +127,6 @@ export default function BattleField(): JSX.Element {
           />
         ))}
       </Stack>
-      {/* {isStartView && <StartScreen setStartView={setIsStartView} />} */}
       <Fade in={isStartView}><Box><StartScreen setStartView={setIsStartView} /></Box></Fade>
       {winner && <FinishScreen character={winner} />}
     </Stack>

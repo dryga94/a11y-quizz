@@ -17,7 +17,7 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          textTransform: 'none'
+          textTransform: 'none',
         },
         sizeSmall: {
           padding: '6px 16px'
@@ -26,7 +26,11 @@ export const theme = createTheme({
           padding: '8px 20px'
         },
         sizeLarge: {
-          padding: '11px 24px'
+          padding: '24px 24px',
+          fontSize: 26,
+          textTransform: "uppercase",
+          borderRadius: "46px",
+          border: "1px solid"
         },
         textSizeSmall: {
           padding: '7px 12px'
@@ -158,10 +162,10 @@ export const theme = createTheme({
     },
     divider: '#E6E8F0',
     primary: {
-      main: '#5048E5',
-      light: '#828DF8',
-      dark: '#3832A0',
-      contrastText: '#FFFFFF'
+      main: '#F5FF7D',
+      light: '#F9FFB0',
+      dark: '#F1FF4A',
+      contrastText: '#000000'
     },
     secondary: {
       main: '#10B981',
@@ -188,9 +192,9 @@ export const theme = createTheme({
       contrastText: '#FFFFFF'
     },
     error: {
-      main: '#D14343',
+      main: '#F37B6C',
       light: '#F37B6C',
-      dark: '#922E2E',
+      dark: '#D14343',
       contrastText: '#FFFFFF'
     },
     text: {

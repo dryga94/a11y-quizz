@@ -67,6 +67,38 @@ export default function QuestionContent({
     handleNextStep();
   }
 
+  const userTestStyles = {
+    flexDirection: "row",
+    gap: 2,
+    alignItems: "center",
+    color: "#787878",
+    textTransform: "upercase",
+    mb: 10,
+    typography: "h5"
+  };
+
+  const characterInfo = [
+    {
+      name: "Serhii M",
+      img: "/img/characters/player1.png"
+    },
+    {
+      name: "Maksym Z",
+      img: "/img/characters/player2.png"
+    },
+    {
+      name: "Serhi iS",
+      img: "/img/characters/player3.png"
+    },
+  ]
+
+  const getUser = (): JSX.Element => {
+    return (<Stack sx={{...userTestStyles}}>
+      <Box component="img" src={characterInfo[activeRoad].img} width={40} height={40} />
+      {characterInfo[activeRoad].name}
+    </Stack>);
+  };
+
   const sistItemButtonStyles = {
     ".MuiBox-root": {
       display: "flex",
@@ -150,9 +182,10 @@ export default function QuestionContent({
     <>
       {!showResultAnswer.isFirsteState ? (
         <>
-          <Box display="grid" p={7}><QuestionResultAnswer isCorrectAnswer={showResultAnswer.isCorrectAnswer} /></Box>
+          <Box display="grid" p={7} alignContent="start"><QuestionResultAnswer isCorrectAnswer={showResultAnswer.isCorrectAnswer} character={getUser()} /></Box>
           <Box p={7}>
-            <Button fullWidth={true} variant="contained" onClick={handleNextStepClick}>
+            <Button fullWidth={true} size="large" variant="contained" onClick={handleNextStepClick}>
+              <Box component="img" src="/img/arrow-right.svg" mr={2}></Box>
               NEXT
             </Button>
           </Box>

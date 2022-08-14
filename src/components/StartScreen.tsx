@@ -47,7 +47,7 @@ export default function StartScreen({setStartView}: IProps): JSX.Element {
         sx={{ ...defaultDecorStyles, top: '10%', right: '10%' }}
       />
       <Box component="img" src="/img/run.gif" sx={{width: "50%"}} />
-      <Button onClick={() => setStartView(false)} variant="contained" sx={{width: 90, height: 90, mt: 3}}>
+      <Button onClick={() => setStartView(false)} variant="contained" color="error" sx={{width: 90, height: 90, mt: 3}}>
         <Box component="img" src="/img/arrow.svg" />
       </Button>
     </Box>
