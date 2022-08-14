@@ -1,5 +1,4 @@
-import { Box, Button, Stack, Typography } from '@mui/material';
-import { ICharacter } from '../interfaces/character';
+import { Box, Button, Typography } from '@mui/material';
 
 interface IProps {
   setStartView(e: boolean): void;
@@ -10,7 +9,7 @@ const defaultDecorStyles = {
   width: 200,
 };
 
-export default function StartScreen({setStartView}: IProps): JSX.Element {
+export default function StartScreen({ setStartView }: IProps): JSX.Element {
   return (
     <Box
       sx={{
@@ -32,13 +31,14 @@ export default function StartScreen({setStartView}: IProps): JSX.Element {
       </Typography>
       <Typography
         sx={{
-            fontSize: 80,
-            fontWeight: "bold",
-            WebkitTextStrokeWidth: "1px",
-            WebkitTextStrokeColor: "black",
-            textFillColor: "#EDE7E2",
-            mb: 2,
-          }}>
+          fontSize: 80,
+          fontWeight: 'bold',
+          WebkitTextStrokeWidth: '1px',
+          WebkitTextStrokeColor: 'black',
+          textFillColor: '#EDE7E2',
+          mb: 2,
+        }}
+      >
         a11y
       </Typography>
       <Box
@@ -46,8 +46,13 @@ export default function StartScreen({setStartView}: IProps): JSX.Element {
         src="/img/start.svg"
         sx={{ ...defaultDecorStyles, top: '10%', right: '10%' }}
       />
-      <Box component="img" src="/img/run.gif" sx={{width: "50%"}} />
-      <Button onClick={() => setStartView(false)} variant="contained" color="error" sx={{width: 90, height: 90, mt: 3}}>
+      <Box component="img" src="/img/run.gif" sx={{ width: '50%' }} />
+      <Button
+        onClick={() => setStartView(false)}
+        variant="contained"
+        color="error"
+        sx={{ width: 90, height: 90, mt: 3 }}
+      >
         <Box component="img" src="/img/arrow.svg" />
       </Button>
     </Box>

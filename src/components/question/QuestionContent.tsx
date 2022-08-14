@@ -54,12 +54,6 @@ export default function QuestionContent({
   const handleHardAnswerOptionClick = (isCorrect: boolean): void => {
     resultAnswer(isCorrect);
     setUserState(activeRoad, false, isCorrect);
-
-    if (isCorrect) {
-      setShowResultAnswer({ isFirsteState: false, isCorrectAnswer: true });
-    } else {
-      setShowResultAnswer({ isFirsteState: false, isCorrectAnswer: false });
-    }
   };
 
   const handleNextStepClick = (): void => {

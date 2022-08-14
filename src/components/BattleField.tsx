@@ -42,7 +42,20 @@ export default function BattleField(): JSX.Element {
     if (usersState?.[getIndexFromEUser(activeRoad)]?.isAbleToAnswer) {
       return;
     }
-    setActiveRoad((prev) => (prev < 2 ? prev + 1 : 0));
+    setActiveRoad((prev) => {
+      setUsersState(
+        (innerPrev) =>
+          ({
+            ...innerPrev,
+            [prev]: {
+              isInPrison: innerPrev?.[prev as EUser].isInPrison,
+              activeStep: innerPrev?.[prev as EUser].activeStep,
+              isAbleToAnswer: true,
+            },
+          } as IUsersState),
+      );
+      return prev < 2 ? prev + 1 : 0;
+    });
   };
 
   const handleChangeUsersState = (index: EUser, userState: IUserState): void => {
@@ -50,7 +63,10 @@ export default function BattleField(): JSX.Element {
       (prev) =>
         ({
           ...prev,
-          [index]: { ...userState, isAbleToAnswer: prev?.[index]?.isAbleToAnswer },
+          [index]: {
+            ...userState,
+            isAbleToAnswer: prev?.[index]?.isAbleToAnswer,
+          },
         } as IUsersState),
     );
   };
@@ -65,11 +81,12 @@ export default function BattleField(): JSX.Element {
         ({
           ...prev,
           [index]: {
-            isInPrison: isInPrison,
-            isAbleToAnswer: isAbleToAnswer,
+            isInPrison,
+            isAbleToAnswer,
           },
         } as IUsersState),
     );
+    console.log({ isAbleToAnswer, isInPrison, usersState });
   };
 
   useEffect(() => {
@@ -98,7 +115,13 @@ export default function BattleField(): JSX.Element {
         )}
         {!gameIsStarted && (
           <Box p={(theme) => theme.spacing(4, 7, 7, 7)}>
-            <Button variant="contained" size="large" fullWidth={true} onClick={handleMove} sx={{ mt: 'auto' }}>
+            <Button
+              variant="contained"
+              size="large"
+              fullWidth={true}
+              onClick={handleMove}
+              sx={{ mt: 'auto' }}
+            >
               <Box component="img" src="/img/arrow-right.svg" mr={2}></Box>
               Start the battle
             </Button>
@@ -118,6 +141,7 @@ export default function BattleField(): JSX.Element {
             key={index}
             isActive={activeRoad === index}
             color={item.color}
+            isAbleToAnswer={usersState?.[index as EUser]?.isAbleToAnswer}
             position={getRoadPosition(index, characterConfig)}
             activeRoad={index}
             character={item}
@@ -127,7 +151,11 @@ export default function BattleField(): JSX.Element {
           />
         ))}
       </Stack>
-      <Fade in={isStartView}><Box><StartScreen setStartView={setIsStartView} /></Box></Fade>
+      <Fade in={isStartView}>
+        <Box>
+          <StartScreen setStartView={setIsStartView} />
+        </Box>
+      </Fade>
       {winner && <FinishScreen character={winner} />}
     </Stack>
   );
