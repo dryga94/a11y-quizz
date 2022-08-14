@@ -17,8 +17,13 @@ import { Theme } from '@mui/material/styles';
 interface IQuestionContentProps {
   activeQuestion: IQuestion;
   activeRoad: EUser;
-  setUserState(activeRoad: number, isInPrison: boolean, isAbleToAnswer: boolean): void;
-  handleNextStep(): void,
+  setUserState(
+    activeRoad: number,
+    isInPrison: boolean,
+    isAbleToAnswer: boolean,
+    isAnswerCorrect?: boolean,
+  ): void;
+  handleNextStep(): void;
 }
 
 interface IShowResultAnswer {
@@ -46,7 +51,7 @@ export default function QuestionContent({
 
   const handleAnswerOptionClick = (isCorrect: IAnswer): void => {
     const isCorrectValue = !!isCorrect.isCorrect;
-    setUserState(activeRoad, !isCorrectValue, false);
+    setUserState(activeRoad, !isCorrectValue, false, isCorrectValue);
 
     resultAnswer(isCorrectValue);
   };
@@ -59,68 +64,70 @@ export default function QuestionContent({
   const handleNextStepClick = (): void => {
     setShowResultAnswer({ isFirsteState: true, isCorrectAnswer: false });
     handleNextStep();
-  }
+  };
 
   const userTestStyles = {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 2,
-    alignItems: "center",
-    color: "#787878",
-    textTransform: "upercase",
+    alignItems: 'center',
+    color: '#787878',
+    textTransform: 'upercase',
     mb: 10,
-    typography: "h5"
+    typography: 'h5',
   };
 
   const characterInfo = [
     {
-      name: "Serhii M",
-      img: "/img/characters/player1.png"
+      name: 'Serhii M',
+      img: '/img/characters/player1.png',
     },
     {
-      name: "Maksym Z",
-      img: "/img/characters/player2.png"
+      name: 'Maksym Z',
+      img: '/img/characters/player2.png',
     },
     {
-      name: "Serhi iS",
-      img: "/img/characters/player3.png"
+      name: 'Serhi iS',
+      img: '/img/characters/player3.png',
     },
-  ]
+  ];
 
   const getUser = (): JSX.Element => {
-    return (<Stack sx={{...userTestStyles}}>
-      <Box component="img" src={characterInfo[activeRoad].img} width={40} height={40} />
-      {characterInfo[activeRoad].name}
-    </Stack>);
+    return (
+      <Stack sx={{ ...userTestStyles }}>
+        <Box component="img" src={characterInfo[activeRoad].img} width={40} height={40} />
+        {characterInfo[activeRoad].name}
+      </Stack>
+    );
   };
 
   const sistItemButtonStyles = {
-    ".MuiBox-root": {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
+    '.MuiBox-root': {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
       flexShrink: 0,
       width: 40,
       height: 40,
       background: (theme: Theme) => theme.palette.background.paper,
-      border: "1px solid",
+      border: '1px solid',
       borderRadius: 1.5,
     },
-    "&:hover": {
-      ".MuiBox-root": {
+    '&:hover': {
+      '.MuiBox-root': {
         background: (theme: Theme) => theme.palette.error.light,
-      }
-    }
-  }
+      },
+    },
+  };
 
   const questionBodyStyles = {
-    maxHeight: "100vh",
+    maxHeight: '100vh',
     p: (theme: Theme) => theme.spacing(7, 0, 7, 7),
     overflow: 'auto',
-  }
+  };
 
   const QuestionBody = (): JSX.Element => {
     return (
-      <Box sx={{...questionBodyStyles}}>
+      <Box sx={{ ...questionBodyStyles }}>
         <Box pr={7}>
           <Typography variant="h1" mb={4}>
             {activeQuestion?.title}
@@ -133,7 +140,10 @@ export default function QuestionContent({
             <List>
               {activeQuestion?.options?.map((answerOption: IAnswer, key) => (
                 <ListItem disablePadding key={key}>
-                  <ListItemButton sx={{...sistItemButtonStyles}} onClick={() => handleAnswerOptionClick(answerOption)}>
+                  <ListItemButton
+                    sx={{ ...sistItemButtonStyles }}
+                    onClick={() => handleAnswerOptionClick(answerOption)}
+                  >
                     <ListItemText
                       primary={
                         <Stack direction="row" alignItems="center" gap={3}>
@@ -176,7 +186,12 @@ export default function QuestionContent({
     <>
       {!showResultAnswer.isFirsteState ? (
         <>
-          <Box display="grid" p={7} alignContent="start"><QuestionResultAnswer isCorrectAnswer={showResultAnswer.isCorrectAnswer} character={getUser()} /></Box>
+          <Box display="grid" p={7} alignContent="start">
+            <QuestionResultAnswer
+              isCorrectAnswer={showResultAnswer.isCorrectAnswer}
+              character={getUser()}
+            />
+          </Box>
           <Box p={7}>
             <Button fullWidth={true} size="large" variant="contained" onClick={handleNextStepClick}>
               <Box component="img" src="/img/arrow-right.svg" mr={2}></Box>

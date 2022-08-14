@@ -75,7 +75,11 @@ export default function BattleField(): JSX.Element {
     index: EUser,
     isInPrison: boolean,
     isAbleToAnswer: boolean,
+    isAnswerCorrect?: boolean,
   ): void => {
+    if (isAnswerCorrect && usersState?.[index].activeStep == FIELDS_COUNT - 3) {
+      setWinner(characterConfig[index]);
+    }
     setUsersState(
       (prev) =>
         ({
@@ -86,7 +90,6 @@ export default function BattleField(): JSX.Element {
           },
         } as IUsersState),
     );
-    console.log({ isAbleToAnswer, isInPrison, usersState });
   };
 
   useEffect(() => {
