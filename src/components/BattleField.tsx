@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from '@mui/material';
+import { Box, Button, Fade, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { serhiiConfig } from '../configs/serhiiSQuestionConfig';
 import { characterConfig } from '../configs/character.config';
@@ -10,6 +10,7 @@ import Rules from './Rules';
 import { getRoadPosition } from '../utils/utils';
 import FinishScreen from './FinishScreen';
 import { ICharacter } from '../interfaces/character';
+import StartScreen from './StartScreen';
 
 const staticFieldStyles = {
   position: 'fixed',
@@ -27,6 +28,7 @@ const staticFieldStyles = {
 
 export default function BattleField(): JSX.Element {
   const [gameIsStarted, setGameIsStarted] = useState(false);
+  const [isStartView, setIsStartView] = useState(true);
   const [activeRoad, setActiveRoad] = useState(-1);
   const [winner, setWinner] = useState<ICharacter>();
   const [activeQuestion, setActiveQuestion] = useState(serhiiConfig[0].defaultQuestions[0]);
@@ -124,6 +126,8 @@ export default function BattleField(): JSX.Element {
           />
         ))}
       </Stack>
+      {/* {isStartView && <StartScreen setStartView={setIsStartView} />} */}
+      <Fade in={isStartView}><Box><StartScreen setStartView={setIsStartView} /></Box></Fade>
       {winner && <FinishScreen character={winner} />}
     </Stack>
   );
