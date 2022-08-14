@@ -19,7 +19,7 @@ export default function Character({ isInPrison, activeStep, character }: IProps)
         left: 1,
         right: 1,
         bottom: 1,
-        height: `${100 / FIELDS_COUNT}vh`,
+        height: `calc(${100 / FIELDS_COUNT}vh - 1px)`,
         bgcolor: color,
         px: 1.5,
         py: 2,

@@ -7,6 +7,9 @@ import { EUser, getIndexFromEUser, IUsersState, IUserState } from '../interfaces
 import QuestionContent from './question/QuestionContent';
 import Road from './Road';
 import Rules from './Rules';
+import { getRoadPosition } from '../utils/utils';
+import FinishScreen from './FinishScreen';
+import { ICharacter } from '../interfaces/character';
 
 const staticFieldStyles = {
   position: 'fixed',
@@ -25,6 +28,7 @@ const staticFieldStyles = {
 export default function BattleField(): JSX.Element {
   const [gameIsStarted, setGameIsStarted] = useState(false);
   const [activeRoad, setActiveRoad] = useState(-1);
+  const [winner, setWinner] = useState<ICharacter>();
   const [activeQuestion, setActiveQuestion] = useState(serhiiConfig[0].defaultQuestions[0]);
 
   const [usersState, setUsersState] = useState<IUsersState>();
@@ -64,7 +68,6 @@ export default function BattleField(): JSX.Element {
           },
         } as IUsersState),
     );
-    console.log(usersState);
   };
 
   useEffect(() => {
@@ -104,33 +107,21 @@ export default function BattleField(): JSX.Element {
         gridTemplateColumns="repeat(3, 20vw)"
         justifyContent="center"
       >
-        <Road
-          isActive={activeRoad === 0}
-          color="#80B4F0"
-          position="left"
-          activeRoad={0}
-          character={characterConfig[0]}
-          setUserState={handleChangeUsersState}
-          isInPrison={usersState?.[0]?.isInPrison || false}
-        />
-        <Road
-          isActive={activeRoad === 1}
-          color="#FFB7B7"
-          activeRoad={1}
-          character={characterConfig[1]}
-          setUserState={handleChangeUsersState}
-          isInPrison={usersState?.[1]?.isInPrison || false}
-        />
-        <Road
-          isActive={activeRoad === 2}
-          color="#C3ABE1"
-          position="right"
-          activeRoad={2}
-          character={characterConfig[2]}
-          setUserState={handleChangeUsersState}
-          isInPrison={usersState?.[2]?.isInPrison || false}
-        />
+        {characterConfig.map((item, index) => (
+          <Road
+            key={index}
+            isActive={activeRoad === index}
+            color={item.color}
+            position={getRoadPosition(index, characterConfig)}
+            activeRoad={index}
+            character={item}
+            setWinner={setWinner}
+            setUserState={handleChangeUsersState}
+            isInPrison={usersState?.[index as EUser]?.isInPrison || false}
+          />
+        ))}
       </Stack>
+      {winner && <FinishScreen character={winner} />}
     </Stack>
   );
 }

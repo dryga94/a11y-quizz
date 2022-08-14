@@ -74,9 +74,9 @@ export default function QuestionContent({
         <QuestionImage src={activeQuestion?.imgUrl}></QuestionImage>
 
         {/* INFO: Options */}
-        {!!activeQuestion?.options && (
+        {!!activeQuestion?.options?.length && (
           <List>
-            {activeQuestion?.options?.map((answerOption: IAnswer, key) => (
+            {activeQuestion.options.map((answerOption: IAnswer, key) => (
               <ListItem disablePadding key={key}>
                 <ListItemButton onClick={() => handleAnswerOptionClick(answerOption)}>
                   <ListItemText primary={`${key + 1}) ${answerOption.title}`} />
@@ -86,7 +86,7 @@ export default function QuestionContent({
           </List>
         )}
 
-        {!activeQuestion.options?.length && (
+        {!activeQuestion?.options?.length && (
           <Stack direction="row" gap={2}>
             <Button
               variant="contained"

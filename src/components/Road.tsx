@@ -15,6 +15,7 @@ interface IProps {
   isInPrison: boolean;
   character: ICharacter;
   setUserState(activeRoad: number, userState: IUserState): void;
+  setWinner?(character: ICharacter): void;
 }
 
 export default function Road({
@@ -25,6 +26,7 @@ export default function Road({
   activeRoad,
   character,
   setUserState,
+  setWinner,
 }: IProps): JSX.Element {
   const [step, setStep] = useState(0);
 
@@ -42,6 +44,9 @@ export default function Road({
         isInPrison,
         activeStep: step - 1,
       });
+    }
+    if (step + 1 === FIELDS_COUNT) {
+        setWinner?.(character)
     }
   }, [step, isInPrison, isActive]);
 
