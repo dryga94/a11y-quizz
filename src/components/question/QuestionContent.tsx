@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IAnswer, IQuestion } from '../../interfaces/questions';
 import { EUser } from '../../interfaces/roads';
 import QuestionImage from './QuestionImage';

@@ -2,7 +2,7 @@ import { Box, Button, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { serhiiConfig } from '../configs/serhiiSQuestionConfig';
 import { characterConfig } from '../configs/character.config';
-import { FIELDS_COUNT, QUESTION_FOOTER_SIZE } from '../constants/battle-field-size';
+import { FIELDS_COUNT } from '../constants/battle-field-size';
 import { EUser, getIndexFromEUser, IUsersState, IUserState } from '../interfaces/roads';
 import QuestionContent from './question/QuestionContent';
 import Road from './Road';
