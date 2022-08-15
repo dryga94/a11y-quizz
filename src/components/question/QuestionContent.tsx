@@ -132,8 +132,8 @@ export default function QuestionContent({
           <Typography variant="h1" mb={4}>
             {activeQuestion?.title}
           </Typography>
-          <Typography mb={3}>{activeQuestion?.description}</Typography>
-          <QuestionImage src={activeQuestion?.imgUrl}></QuestionImage>
+          <Typography mb={3}>{`${activeQuestion?.description}`}</Typography>
+          {activeQuestion?.imgUrl && <QuestionImage src={activeQuestion?.imgUrl}></QuestionImage>}
 
           {/* INFO: Options */}
           {!!activeQuestion?.options && (
