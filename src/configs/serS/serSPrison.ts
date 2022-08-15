@@ -19,15 +19,26 @@ export const serSQuestionConfigPrison = [
     title: 'Prison question 5 (Ser.Sh)',
     description: `Объясните код, все ли ок:`,
     code: `
-    <div id="restaurant-feed" role="feed">
-      <div role="article" class="restaurant-item" aria-posinset="1" tabindex="0" aria-labelledby="restaurant-name-1"
-        aria-describedby="restaurant-rating-1 restaurant-type-1 restaurant-location-1" aria-setsize="10">
-        <div class="restaurant-details">
-          <div class="restaurant-name" id="restaurant-name-1">Tito's Tacos</div>
-        </div>
-        <div class="restaurant-actions"><button type="button" class="bookmark-button">Bookmark</button></div>
+<div id="restaurant-feed" role="feed">
+  <div role="article"
+    class="restaurant-item"
+    aria-posinset="1"
+    tabindex="0"
+    aria-labelledby="restaurant-name-1"
+    aria-describedby="restaurant-rating-1 restaurant-type-1 restaurant-location-1"
+    aria-setsize="10">
+    <div class="restaurant-details">
+      <div class="restaurant-name" id="restaurant-name-1">
+        Tito's Tacos
       </div>
-    </div>`,
+    </div>
+    <div class="restaurant-actions">
+      <button type="button" class="bookmark-button">
+        Bookmark
+      </button>
+    </div>
+  </div>
+</div>`,
   },
   {
     title: 'Prison question 6 (Ser.Sh)',
