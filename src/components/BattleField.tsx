@@ -132,7 +132,17 @@ export default function BattleField(): JSX.Element {
         )}
       </Box>
       <Box sx={{ ...staticFieldStyles, bottom: 0, top: 'auto' }}>Start</Box>
-      <Box sx={{ ...staticFieldStyles }}>Finish</Box>
+      <Box
+        sx={{
+          ...staticFieldStyles,
+          background:
+            'conic-gradient(#fff 0.25turn, #000 0.25turn 0.5turn, #fff 0.5turn 0.75turn, #000 0.75turn) top left / 10% 50% repeat',
+        }}
+      >
+        <Box color="yellow" sx={{ mixBlendMode: 'difference', fontWeight: 900, fontSize: 60 }}>
+          Finish
+        </Box>
+      </Box>
       <Stack
         minHeight="100vh"
         display="grid"
