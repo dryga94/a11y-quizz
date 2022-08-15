@@ -27,8 +27,8 @@ export default function Rules(): JSX.Element {
         <Typography variant="subtitle1">Доп. информация:</Typography>
 
         <Box component="ul" mb={3}>
-          <Box component="li">У каждого участника есть 1-на тайная клеточка с вопросом.</Box>
           <Box component="li">Вопросы, которые помогают выйти из тюрьмы сложнее в виде ответа. (Так как нужно будет дать либо развернутый ответ, либо написать код.</Box>
+          <Box component="li">Правила игры не справидливы и могут менятся в течении игры. Вопросы подобраны предвзято.</Box>
         </Box>
         </Box>
     </Box>

@@ -12,8 +12,18 @@ export const serMQuestionConfigPrison = [
     title: 'Prison question 3 (Ser.M)',
     description: `Прокомментируйте код:`,
     code: `
-    <div class="visualy-hidden" alt="This div read on screen reader the results of searched persons and its not visible" aria-atomic="true" aria-live="assertive">
-      <span class="visualy-hidden" aria-label=" 'Showing '+result.length + ' results.'"></span>
+    <div
+      class="visualy-hidden"
+      alt="This div read on screen
+          reader the results of searched persons
+          and its not visible"
+      aria-atomic="true"
+      aria-live="assertive"
+    >
+      <span
+          class="visualy-hidden"
+          aria-label=" 'Showing '+result.length + ' results.'">
+      </span>
     </div>`,
   },
   {

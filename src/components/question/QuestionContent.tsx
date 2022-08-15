@@ -132,9 +132,9 @@ export default function QuestionContent({
           <Typography variant="h1" mb={4}>
             {activeQuestion?.title}
           </Typography>
-          <Typography mb={3}>{`${activeQuestion?.description}`}</Typography>
+          <Typography mb={3} fontSize={20}>{`${activeQuestion?.description}`}</Typography>
           {activeQuestion?.code && (
-            <Box width={1} mt={3} mb={3}>
+            <Box width={1} mt={3} mb={3} component="pre">
               <Box
                 component="code"
                 sx={{
@@ -144,7 +144,9 @@ export default function QuestionContent({
                   border: '1px solid grey',
                   backgroundColor: 'black',
                   fontFamily: 'monospace',
-                  color: 'white',
+                  color: 'burlywood',
+                  overflowX: 'auto',
+                  maxWidth: 1,
                 }}
               >
                 {activeQuestion.code}
