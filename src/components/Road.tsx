@@ -53,7 +53,9 @@ export default function Road({
   }, [step, isInPrison, isActive]);
 
   return (
-    <Box bgcolor={isActive ? 'secondary.light' : 'transparent'}>
+    <Box
+      sx={{ bgcolor: isActive ? 'secondary.light' : 'transparent', opacity: isActive ? 1 : 0.4 }}
+    >
       <Box position="relative">
         <Stack>
           {Array.from(Array(FIELDS_COUNT).keys())
