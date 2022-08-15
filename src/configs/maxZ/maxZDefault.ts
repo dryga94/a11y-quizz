@@ -2,7 +2,7 @@ export const MaxZQuestionConfig = [
   {
     title: 'Question 1 Maks Z',
     description: 'Доступен приведенный ниже фрагмент CSS? Почему?',
-    imgUrl: '',
+    imgUrl: '/img/q5.png',
     options: [
       {
         title: 'Да',

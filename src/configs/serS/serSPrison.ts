@@ -17,8 +17,8 @@ export const serSQuestionConfigPrison = [
   },
   {
     title: 'Prison question 5 (Ser.Sh)',
-    description: `Объясните код, все ли ок:
-
+    description: `Объясните код, все ли ок:`,
+    code: `
     <div id="restaurant-feed" role="feed">
       <div role="article" class="restaurant-item" aria-posinset="1" tabindex="0" aria-labelledby="restaurant-name-1"
         aria-describedby="restaurant-rating-1 restaurant-type-1 restaurant-location-1" aria-setsize="10">
@@ -31,8 +31,8 @@ export const serSQuestionConfigPrison = [
   },
   {
     title: 'Prison question 6 (Ser.Sh)',
-    description: `Объясните код, все ли ок:
-
+    description: `Объясните код, все ли ок:`,
+    code: `
     <div id="dialog_layer" class="dialogs">
       <div role="dialog" id="dialog1"   class="hidden">
         <h2 id="dialog1_label" class="dialog_label">Add Delivery Address</h2>

@@ -52,7 +52,7 @@ export const serMDefaultQuestionConfig = [
   {
     title: 'Question 4 Serhii M',
     description: 'Какой landmark следует использовать для этих разделов?',
-    imgUrl: '',
+    imgUrl: '/img/q3.png',
     options: [
       {
         title: '<title> <header> <banner>',

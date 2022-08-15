@@ -22,7 +22,8 @@ export const  maxZQuestionConfigPrison = [
   },
   {
     title: 'Prison question 6 (Max)',
-    description: `Объясните код ниже, валиден ли он:
+    description: `Объясните код ниже, валиден ли он:`,
+    code: `
     <div role="meter"
       aria-valuenow="90"
       aria-labelledby="cpu_usage_label">

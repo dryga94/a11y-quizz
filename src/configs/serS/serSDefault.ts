@@ -3,7 +3,7 @@ export const serHDefaultQuestionConfig = [
     title: 'Question 1 Serhii S',
     description:
       'Открыв веб-сайт Honda, программа чтения с экрана прочитает первый интерактивный элемент примерно так: ссылка, изображение, aitch tee tee pee ess двоеточие косая черта косая черта double-u double-u double-u точка honda dot com косая черта (ссылка, изображение, https://www.honda.com/) Почему мы это слышим?',
-    imgUrl: '',
+    imgUrl: '/img/q4.png',
     options: [
       {
         title: 'На изображении отсутствует альтернативный текст.',
@@ -27,7 +27,7 @@ export const serHDefaultQuestionConfig = [
         <h3>Митхун Чакраборти собирается присоединиться....</h3>
         <h3>Римская серия: Винеш Фогат выигрывает 2-ю золотую медаль</h3>
     `,
-    imgUrl: '',
+    imgUrl: 'img/q2.png',
     options: [
       {
         title: 'Да. <h2> — самый важный.',
@@ -86,7 +86,7 @@ export const serHDefaultQuestionConfig = [
     title: 'Question 5 Serhii S',
     description:
       'Какое из этих замещающих текстовых описаний изображений лучше всего подходит для слабовидящих пользователей?',
-    imgUrl: '',
+    imgUrl: 'img/q1.png',
     options: [
       {
         title: 'Изображение хомяка',

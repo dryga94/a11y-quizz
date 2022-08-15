@@ -5,13 +5,13 @@ export const serMQuestionConfigPrison = [
   },
   {
     title: 'Prison question 2 (Ser.M)',
-    description: `С точки зрения доступности если разница в этих пустых списках?
-    <ul></ul>
-    <div role="list"></div>`,
+    description: `С точки зрения доступности если разница в этих пустых списках?`,
+    code: `<ul></ul>  <div role="list"></div>`,
   },
   {
     title: 'Prison question 3 (Ser.M)',
-    description: `Прокомментируйте код:
+    description: `Прокомментируйте код:`,
+    code: `
     <div class="visualy-hidden" alt="This div read on screen reader the results of searched persons and its not visible" aria-atomic="true" aria-live="assertive">
       <span class="visualy-hidden" aria-label=" 'Showing '+result.length + ' results.'"></span>
     </div>`,
@@ -26,11 +26,11 @@ export const serMQuestionConfigPrison = [
   },
   {
     title: 'Prison question 6 (Ser.M)',
-    description: `Корректен ли код? Аргументируйте свой ответ
+    description: `Корректен ли код? Аргументируйте свой ответ`,
+    code: `
     <ul role="list" style="list-style: none;">
       <li>Slava</li>
       <li>UA</li>
-    </ul>
-    `,
+    </ul>`,
   },
 ]
