@@ -177,7 +177,7 @@ export default function QuestionContent({
           )}
 
           {!activeQuestion?.options?.length && (
-            <Stack direction="row" gap={2}>
+            <Stack direction="row" gap={2} py={3}>
               <Button
                 variant="contained"
                 color="error"
