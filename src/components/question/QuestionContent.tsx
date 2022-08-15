@@ -133,6 +133,24 @@ export default function QuestionContent({
             {activeQuestion?.title}
           </Typography>
           <Typography mb={3}>{`${activeQuestion?.description}`}</Typography>
+          {activeQuestion?.code && (
+            <Box width={1} mt={3} mb={3}>
+              <Box
+                component="code"
+                sx={{
+                  display: 'block',
+                  p: 2,
+                  width: 1,
+                  border: '1px solid grey',
+                  backgroundColor: 'black',
+                  fontFamily: 'monospace',
+                  color: 'white',
+                }}
+              >
+                {activeQuestion.code}
+              </Box>
+            </Box>
+          )}
           {activeQuestion?.imgUrl && <QuestionImage src={activeQuestion?.imgUrl}></QuestionImage>}
 
           {/* INFO: Options */}

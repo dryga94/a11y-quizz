@@ -10,6 +10,7 @@ export interface IQuestion {
   description?: ReactNode;
   imgUrl?: string;
   options?: IAnswer[];
+  code?: string;
 }
 
 export interface IQuestions {
