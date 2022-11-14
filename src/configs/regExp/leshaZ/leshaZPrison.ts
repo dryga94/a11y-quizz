@@ -1,4 +1,4 @@
-export const serMQuestionConfigPrison = [
+export const leshaZQuestionConfigPrison = [
   {
     title: 'Prison question 1 Lesha Z',
     description: 'Равны ли выражения /(Леха)+/ и /(Леха){0,}/ ',
