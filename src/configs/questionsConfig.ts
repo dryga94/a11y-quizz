@@ -1,9 +1,11 @@
 import { IQuestions } from '../interfaces/questions';
-import { MaxZQuestionConfig } from './maxZ/maxZDefault';
-import { maxZQuestionConfigPrison } from './maxZ/maxZPrison';
-import { serMDefaultQuestionConfig } from './serM/serMDefault';
+import { leshaZDefaultQuestionConfig } from './regExp/leshaZ/leshaZDefault';
+import { MaxZQuestionConfig } from './regExp/maxZ/maxZDefault';
+import { maxZQuestionConfigPrison } from './regExp/maxZ/maxZPrison';
+import { MishaBQuestionConfig } from './regExp/mishaB/mishaBDefault';
+import { mishaBQuestionConfigPrison } from './regExp/mishaB/mishaBPrison';
+import { serMDefaultQuestionConfig } from './regExp/serhiiM/serMDefault';
 import { serMQuestionConfigPrison } from './serM/serMPrison';
-import { serHDefaultQuestionConfig } from './serS/serSDefault';
 import { serSQuestionConfigPrison } from './serS/serSPrison';
 
 export const QuestionsConfig = [
@@ -16,7 +18,11 @@ export const QuestionsConfig = [
     prisonQuestions: [...maxZQuestionConfigPrison],
   },
   {
-    defaultQuestions: [...serHDefaultQuestionConfig],
+    defaultQuestions: [...MishaBQuestionConfig],
+    prisonQuestions: [...mishaBQuestionConfigPrison],
+  },
+  {
+    defaultQuestions: [...leshaZDefaultQuestionConfig],
     prisonQuestions: [...serSQuestionConfigPrison],
   },
 ] as IQuestions[];

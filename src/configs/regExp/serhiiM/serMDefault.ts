@@ -1,0 +1,108 @@
+export const serMDefaultQuestionConfig = [
+  {
+    title: 'Question 1 Serhii M',
+    description: 'Как расшифровывается RegExp?',
+    options: [
+      {
+        title: 'Regular expression',
+        isCorrect: true,
+      },
+      {
+        title: 'Reglament of expiring',
+      },
+      {
+        title: 'Real Expressionists',
+      },
+      {
+        title: 'RegExp блеять и RegExp. Никак бля!',
+      },
+    ],
+  },
+  {
+    title: 'Question 2 Serhii M',
+    description: '\\uhhhh 的意思是什么',
+    options: [
+      {
+        title: '匹配一个 NUL 字符。不要在此后面加上另一个数字。',
+      },
+      {
+        title: '匹配换页符。',
+      },
+      {
+        title: '匹配垂直制表符。',
+      },
+      {
+        title: 'ਕੈਰੇਜ ਰਿਟਰਨ ਨਾਲ ਮੇਲ ਖਾਂਦਾ ਹੈ।',
+      },
+    ],
+  },
+  {
+    title: 'Question 3 Serhii M',
+    description:
+      'Что выведет регулярка \n let text = `Is this\n all there\nis`\n let pattern = /^is/gm\n let result = text.match(pattern);\nconsole.log(result)',
+    options: [
+      {
+        title: 'isis',
+      },
+      {
+        title: 'null',
+      },
+      {
+        title: 'undefined',
+      },
+      {
+        title: 'is',
+        isCorrect: true,
+      },
+      {
+        title: 'Is this all there is',
+      },
+    ],
+  },
+  {
+    title: 'Question 4 Serhii M',
+    description:
+      'Чему будет равен result:\n let text = "100, 1000 or 10000?";\n let pattern = /\\d{2,3}/g;\n let result = text.match(pattern);',
+    options: [
+      {
+        title: '100,100,100',
+      },
+      {
+        title: '100,1000,10000',
+      },
+      {
+        title: '100,100,100,00',
+        isCorrect: true,
+      },
+      {
+        title: '10,010',
+      },
+    ],
+  },
+  {
+    title: 'Question 5 Serhii M',
+    description:
+      'Что выведет консоль лог и почему:\n const regExp3 = new RegExp("\\^\\$\\.", "i");\n console.log(regExp3.test("^$."));\n console.log(/\\^$\\./i.test("^$."));',
+    options: [
+      {
+        title: 'true - true',
+      },
+      {
+        title: 'false - true',
+        isCorrect: true,
+      },
+      {
+        title: 'false - false',
+      },
+      {
+        title: '^$. - ^$.',
+      },
+      {
+        title: '^$ - ^$',
+      },
+      {
+        title: 'true - ^$.',
+      },
+    ],
+  },
+];

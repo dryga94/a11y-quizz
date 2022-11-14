@@ -6,13 +6,18 @@ export const characterConfig: ICharacter[] = [
         url: '/img/characters/player1.png'
     },
     {
-        name: 'Maksym Z',
+        name: 'Maks Z',
         color: '#FFB7B7',
         url: '/img/characters/player2.png'
     },
     {
-        name: 'Serhii S',
+        name: 'Misha B',
         color: '#C3ABE1',
         url: '/img/characters/player3.png'
+    },
+    {
+        name: 'Lesha Z',
+        color: 'lightgreen',
+        url: '/img/characters/player4.png'
     }
 ]

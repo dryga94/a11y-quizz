@@ -17,7 +17,7 @@ export default function QuestionResultAnswer({isCorrectAnswer, character}: Quest
 
   return (
     <>
-      <Typography variant="h1" fontSize={100} fontWeight={500} textOverflow="ellipsis" overflow="hidden" mb={2}>
+      <Typography variant="h1" fontSize={60} fontWeight={500} textOverflow="ellipsis" overflow="hidden" mb={2}>
         {title}
       </Typography>
       {character}

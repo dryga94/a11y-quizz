@@ -54,7 +54,7 @@ export default function BattleField(): JSX.Element {
             },
           } as IUsersState),
       );
-      return prev < 2 ? prev + 1 : 0;
+      return prev < 3 ? prev + 1 : 0;
     });
   };
 
@@ -146,7 +146,7 @@ export default function BattleField(): JSX.Element {
       <Stack
         minHeight="100vh"
         display="grid"
-        gridTemplateColumns="repeat(3, 20vw)"
+        gridTemplateColumns="repeat(4, 15vw)"
         justifyContent="center"
       >
         {characterConfig.map((item, index) => (

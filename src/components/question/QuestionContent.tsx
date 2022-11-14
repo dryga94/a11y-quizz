@@ -82,12 +82,16 @@ export default function QuestionContent({
       img: '/img/characters/player1.png',
     },
     {
-      name: 'Maksym Z',
+      name: 'Maks Z',
       img: '/img/characters/player2.png',
     },
     {
-      name: 'Serhi iS',
+      name: 'Misha B',
       img: '/img/characters/player3.png',
+    },
+    {
+      name: 'Lesha Z',
+      img: '/img/characters/player4.png',
     },
   ];
 
@@ -132,7 +136,11 @@ export default function QuestionContent({
           <Typography variant="h1" mb={4}>
             {activeQuestion?.title}
           </Typography>
-          <Typography mb={3} fontSize={20}>{`${activeQuestion?.description}`}</Typography>
+          <Typography
+            mb={3}
+            fontSize={20}
+            sx={{ whiteSpace: 'pre-wrap' }}
+          >{`${activeQuestion?.description}`}</Typography>
           {activeQuestion?.code && (
             <Box width={1} mt={3} mb={3} component="pre">
               <Box
