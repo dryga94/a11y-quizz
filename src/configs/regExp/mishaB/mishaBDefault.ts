@@ -36,79 +36,68 @@ export const MishaBQuestionConfig = [
   },
   {
     title: 'Question 3 Misha B',
-    description:
-      'Что выведет регулярка -  /RegExr/gi для\n "RegExr was created by gskinner.com.Edit the Expression & Text to see matches. Also regexrto use everywhere."',
+    description: 'Как обозначить выбор точки в регулярном выражении?',
     options: [
       {
-        title: 'RegExr',
+        title: '/./',
       },
       {
-        title: 'regexr',
+        title: ' /{.}/ ',
       },
       {
-        title: 'лох',
+        title: '/‘.’/',
       },
       {
-        title: 'regexrto',
-      },
-      {
-        title: 'нічого',
-      },
-      {
-        title: 'RegExrregexr',
+        title: '/\\./',
         isCorrect: true,
       },
     ],
   },
   {
     title: 'Question 4 Misha B',
-    description:
-      'Что выведет:\n /.(\\.\\\\\\.\\.com)/g \n"RegExr was created by gskinner.com. gskinnerhttps://regexr.com +  gskinnerhttps://regexr.com"',
+    description: 'Что выведет:\n/\\x57/gi\nI will visit the site XXX with www, OR WebHub!',
     options: [
       {
-        title: 'https://regexr.com',
+        title: 'XXX',
       },
       {
-        title: 'Передаю Слово Серегe',
+        title: 'hh',
       },
       {
-        title: 'Нічого',
+        title: 'W',
+      },
+      {
+        title: 'X',
+      },
+      {
+        title: 'wwwwwW',
         isCorrect: true,
       },
       {
-        title: 'https://regexr.comhttps://regexr.com',
-      },
-      {
-        title: '.com',
+        title: 'iiiii',
       },
     ],
   },
   {
     title: 'Question 5 Misha B',
     description:
-      "Что выведет:\n const re = /(\\w+)\\s(\\w+)\\s(\\w+)\\s('w+)/;\n const str = 'Tu huy ne Ya';\n const newstr = str.replace(re, '$4, $2, $3, $1');\n console.log(newstr);",
+      "Чему будет равен result:\nlet text = 'Is this all there is';\nlet pattern = /is(?! all)/gi;\nlet result = text.match(pattern);",
     options: [
       {
-        title: 'Nihuya, sho za bred',
+        title: 'is',
       },
       {
-        title: 'Tu huy ne Ya',
+        title: 'all',
       },
       {
-        title: 'Ya huy ne Tu',
+        title: 'is is',
+      },
+      {
+        title: 'Is',
+      },
+      {
+        title: 'Isis',
         isCorrect: true,
-      },
-      {
-        title: 'Vse yui no ne ya',
-      },
-      {
-        title: 'три пробела',
-      },
-      {
-        title: 'null',
-      },
-      {
-        title: 'undefined',
       },
     ],
   },

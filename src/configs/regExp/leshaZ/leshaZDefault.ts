@@ -36,6 +36,25 @@ export const leshaZDefaultQuestionConfig = [
   },
   {
     title: 'Question 3 Lesha Z',
+    description: 'Каким способом нельзя выделить Huilo в строке putin Huilo.',
+    options: [
+      {
+        title: '/Huilo/',
+      },
+      {
+        title: '/[a-z]{5}/i',
+        isCorrect: true,
+      },
+      {
+        title: '/H([a-z])*/',
+      },
+      {
+        title: '/.{3}lo/',
+      },
+    ],
+  },
+  {
+    title: 'Question 4 Lesha Z',
     description:
       'Что выведет регулярка -  /[HOTUL]/ для:\n "Tut karoche bude shos. Uvas kstati mishi. dada. Lol kak Oni suda popali.Hahahah."',
     options: [
@@ -64,48 +83,25 @@ export const leshaZDefaultQuestionConfig = [
     ],
   },
   {
-    title: 'Question 4 Lesha Z',
-    description:
-      'Чему будет равен result:\n let text = "100, 1000 or 10000?";\n let pattern = /\\d{2,3}/g;\n let result = text.match(pattern);',
-    options: [
-      {
-        title: '100,100,100',
-      },
-      {
-        title: '100,1000,10000',
-      },
-      {
-        title: '100,100,100,00',
-        isCorrect: true,
-      },
-      {
-        title: '10,010',
-      },
-    ],
-  },
-  {
     title: 'Question 5 Lesha Z',
     description:
-      'Что выведет консоль лог и почему:\n const regExp3 = new RegExp("\\^\\$\\.", "i");\n console.log(regExp3.test("^$."));\n console.log(/\\^$\\./i.test("^$."));',
+      'Что выведет:\n/([love]|(yo\\w+))/gi\n"evol, or uoy! gren,love You, gr, blue, yellow"',
     options: [
       {
-        title: 'true - true',
-      },
-      {
-        title: 'false - true',
+        title: 'evolooeloveYouleello',
         isCorrect: true,
       },
       {
-        title: 'false - false',
+        title: 'evolowwoeloveleello',
       },
       {
-        title: '^$. - ^$.',
+        title: 'evolooeooe',
       },
       {
-        title: '^$ - ^$',
+        title: 'evolooelveYouleello',
       },
       {
-        title: 'true - ^$.',
+        title: 'evolooeloveeve',
       },
     ],
   },

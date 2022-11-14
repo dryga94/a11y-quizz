@@ -9,14 +9,16 @@ export const serMQuestionConfigPrison = [
   },
   {
     title: 'Prison question 3 Lesha Z',
-    description: `Как отработает регулярка для текста? Обьясните.\n/[.*+?^\${1,6}()|[\\]\\\\]/g\n"123abc \\$& Prosto text, and symvolu. (Start? [OR] end! Also mozna pokupat evro\\$ . {41.22-45.54}UAH ) |"`,
+    description: `Что ищет эта регулярка?\n/\\#([a-fA-F]|[0-9]){3,6}/g`,
   },
   {
     title: 'Prison question 4 Lesha Z',
-    description: '"Называя девушку тёлкой - это комплименет, обзывательства или сексизм?"\nВыше пример. Что подпадет под регулярку такого типа - /[а-я0-9]/g',
+    description:
+      '"Что выведет регулярка\n  /RegExr/gi\nдля\n "RegExr was created by gskinner.com.Edit the Expression & Text to see matches. Also regexrto use everywhere."',
   },
   {
     title: 'Prison question 5 Lesha Z',
-    description: 'Чем отличается роли marquee от log ?',
+    description:
+      'Что выведет:\n/\\w /gi\n"I Dumayu sho Uchasniki ne durnenki Кrome ..."\nВопрос с Подвохом',
   },
 ];

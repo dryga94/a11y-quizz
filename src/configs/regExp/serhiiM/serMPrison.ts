@@ -17,6 +17,6 @@ export const serMQuestionConfigPrison = [
   },
   {
     title: 'Prison question 5 (Ser.M)',
-    description: 'Чем отличается роли marquee от log ?',
+    description: 'Чему будет равен result:\nlet text = "100, 1000 or 10000?";\nlet pattern = /\\d{2,3}/g;\nlet result = text.match(pattern);',
   },
 ];

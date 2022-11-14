@@ -38,6 +38,25 @@ export const serMDefaultQuestionConfig = [
   },
   {
     title: 'Question 3 Serhii M',
+    description: 'Какие буковки могут стоят в конце регулярного выражения как флаги',
+    options: [
+      {
+        title: 'g i m s u y',
+        isCorrect: true,
+      },
+      {
+        title: 'g i m s  p',
+      },
+      {
+        title: 'g m i',
+      },
+      {
+        title: 'g m i s y t j k',
+      },
+    ],
+  },
+  {
+    title: 'Question 4 Serhii M',
     description:
       'Что выведет регулярка \n let text = `Is this\n all there\nis`\n let pattern = /^is/gm\n let result = text.match(pattern);\nconsole.log(result)',
     options: [
@@ -60,29 +79,9 @@ export const serMDefaultQuestionConfig = [
     ],
   },
   {
-    title: 'Question 4 Serhii M',
-    description:
-      'Чему будет равен result:\n let text = "100, 1000 or 10000?";\n let pattern = /\\d{2,3}/g;\n let result = text.match(pattern);',
-    options: [
-      {
-        title: '100,100,100',
-      },
-      {
-        title: '100,1000,10000',
-      },
-      {
-        title: '100,100,100,00',
-        isCorrect: true,
-      },
-      {
-        title: '10,010',
-      },
-    ],
-  },
-  {
     title: 'Question 5 Serhii M',
     description:
-      'Что выведет консоль лог и почему:\n const regExp3 = new RegExp("\\^\\$\\.", "i");\n console.log(regExp3.test("^$."));\n console.log(/\\^$\\./i.test("^$."));',
+      'Что выведет консоль лог и почему:\nconst regExp3 = new RegExp("^\\$\\.", "i");\nconsole.log(regExp3.test("^$."));\nconsole.log(/\\^\\$\\./i.test("^$."));',
     options: [
       {
         title: 'true - true',

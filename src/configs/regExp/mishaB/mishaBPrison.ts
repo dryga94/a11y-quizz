@@ -15,12 +15,11 @@ export const mishaBQuestionConfigPrison = [
   {
     title: 'Prison question 4 Misha B',
     description:
-      "Что выведет:\n /\\d+(?!\\.)/ \n We will check the number It's (3.141). 3.141 it is Pi. \nОбьясните",
+      "Что ищет эта регулярка?\n/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/gmi",
   },
   {
     title: 'Prison question 5 Misha B',
     description:
-      'Онлайн-посетители с физическими или когнитивными нарушениями могут испытывать трудности с этой онлайн-формой из-за:',
-    imgUrl: '/img/question-5-max.png',
+      'Можно ли с помощью начала мира, доллара и регулярок выгнать путена с Украины?',
   },
 ];
