@@ -138,7 +138,7 @@ export default function QuestionContent({
           </Typography>
           <Typography
             mb={3}
-            fontSize={20}
+            fontSize={26}
             sx={{ whiteSpace: 'pre-wrap' }}
           >{`${activeQuestion?.description}`}</Typography>
           {activeQuestion?.code && (
