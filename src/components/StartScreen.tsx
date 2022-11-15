@@ -39,7 +39,7 @@ export default function StartScreen({ setStartView }: IProps): JSX.Element {
           mb: 2,
         }}
       >
-        a11y
+        RegExp
       </Typography>
       <Box
         component="img"
