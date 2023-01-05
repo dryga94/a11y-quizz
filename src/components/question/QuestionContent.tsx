@@ -27,7 +27,7 @@ interface IQuestionContentProps {
 }
 
 interface IShowResultAnswer {
-  isFirsteState: boolean;
+  isFirstState: boolean;
   isCorrectAnswer: boolean;
 }
 
@@ -38,14 +38,14 @@ export default function QuestionContent({
   handleNextStep,
 }: IQuestionContentProps): JSX.Element {
   const [showResultAnswer, setShowResultAnswer] = useState<IShowResultAnswer>({
-    isFirsteState: true,
+    isFirstState: true,
     isCorrectAnswer: true,
   });
   const resultAnswer = (isCorrect: boolean): void => {
     if (isCorrect) {
-      setShowResultAnswer({ isFirsteState: false, isCorrectAnswer: true });
+      setShowResultAnswer({ isFirstState: false, isCorrectAnswer: true });
     } else {
-      setShowResultAnswer({ isFirsteState: false, isCorrectAnswer: false });
+      setShowResultAnswer({ isFirstState: false, isCorrectAnswer: false });
     }
   };
 
@@ -62,7 +62,7 @@ export default function QuestionContent({
   };
 
   const handleNextStepClick = (): void => {
-    setShowResultAnswer({ isFirsteState: true, isCorrectAnswer: false });
+    setShowResultAnswer({ isFirstState: true, isCorrectAnswer: false });
     handleNextStep();
   };
 
@@ -212,7 +212,7 @@ export default function QuestionContent({
 
   return (
     <>
-      {!showResultAnswer.isFirsteState ? (
+      {!showResultAnswer.isFirstState ? (
         <>
           <Box display="grid" p={7} alignContent="start">
             <QuestionResultAnswer

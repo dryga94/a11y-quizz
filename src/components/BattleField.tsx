@@ -11,6 +11,8 @@ import { getRoadPosition } from '../utils/utils';
 import FinishScreen from './FinishScreen';
 import { ICharacter } from '../interfaces/character';
 import StartScreen from './StartScreen';
+import { ILocalStorage } from '../interfaces/toLocalStorage';
+import { isGetAccessor } from 'typescript';
 
 const staticFieldStyles = {
   position: 'fixed',
@@ -93,6 +95,24 @@ export default function BattleField(): JSX.Element {
   };
 
   useEffect(() => {
+    // to update localStorage
+    if (usersState) {
+      const toLocalStorage: ILocalStorage = {
+        activeQuestion: activeQuestion,
+        activeRoad: activeRoad,
+        usersState: {
+          [EUser.SerhiiM]: usersState[EUser.SerhiiM] as IUserState,
+          [EUser.Maksymz]: usersState[EUser.Maksymz] as IUserState,
+          [EUser.MishaB]: usersState[EUser.MishaB] as IUserState,
+          [EUser.LeshaZ]: usersState[EUser.LeshaZ] as IUserState,
+        },
+        isStartView: isStartView,
+        gameIsStarted: gameIsStarted,
+      };
+
+      window.localStorage.setItem('USERS_STATE', JSON.stringify(toLocalStorage));
+    }
+
     const config = usersState?.[getIndexFromEUser(activeRoad)]?.isInPrison
       ? 'prisonQuestions'
       : 'defaultQuestions';
@@ -101,7 +121,31 @@ export default function BattleField(): JSX.Element {
         usersState?.[getIndexFromEUser(activeRoad)]?.activeStep || 0
       ],
     );
-  }, [activeRoad, usersState, getIndexFromEUser]);
+  }, [activeRoad, isStartView, usersState, getIndexFromEUser]);
+
+  useEffect(() => {
+    if (window.localStorage.getItem('USERS_STATE') === null) return;
+
+    const stateFromLocalStorage: ILocalStorage = JSON.parse(
+      window.localStorage.getItem('USERS_STATE')!,
+    );
+    const usersData: IUsersState = stateFromLocalStorage.usersState;
+
+    setIsStartView(stateFromLocalStorage.isStartView);
+    setGameIsStarted(stateFromLocalStorage.gameIsStarted);
+    setActiveQuestion(stateFromLocalStorage.activeQuestion);
+
+    setActiveRoad(() => {
+      return stateFromLocalStorage.activeRoad < 3 ? stateFromLocalStorage.activeRoad : 0;
+    });
+
+    setUsersState({
+      [EUser.SerhiiM]: usersData[EUser.SerhiiM],
+      [EUser.Maksymz]: usersData[EUser.Maksymz],
+      [EUser.MishaB]: usersData[EUser.MishaB],
+      [EUser.LeshaZ]: usersData[EUser.LeshaZ],
+    } as IUsersState);
+  }, []);
 
   return (
     <Stack direction="row" justifyContent="flex-end">

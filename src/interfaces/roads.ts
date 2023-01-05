@@ -1,11 +1,20 @@
 import { IQuestion } from './questions';
 
-export enum EUser {
-  SerhiiM = 0,
-  Maksymz = 1,
-  MishaB = 2,
-  LeshaZ = 3,
+// export enum EUser {
+//   SerhiiM = 0,
+//   Maksymz = 1,
+//   MishaB = 2,
+//   LeshaZ = 3,
+// }
+
+//  by default enums starts from 0 and increases on +1.
+ export enum EUser {
+  SerhiiM,
+  Maksymz,
+  MishaB,
+  LeshaZ,
 }
+
 export interface IActiveRoadInfo {
   question: IQuestion;
   isInPrison?: boolean;
